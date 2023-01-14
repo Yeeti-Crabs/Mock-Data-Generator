@@ -4,12 +4,15 @@
  */
 
 import React from 'react';
+import MainContainer from './containers/MainContainer.jsx'
 
 
 const App = () => {
   return (
     <div>
-      <h1>Yeeet</h1>
+      <HeaderContainer />
+      <MainContainer />
+      <FooterContainer />
     </div>
   );
 };
