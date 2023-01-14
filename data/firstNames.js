@@ -1003,7 +1003,6 @@ const firstName = [{ firstName: 'Aya', nameNum: 0 },
   { firstName: 'Carlee', nameNum: 1001 },
   { firstName: 'Fletcher', nameNum: 1002 },
   { firstName: 'Christianna', nameNum: 1003 },
-  { firstName: 'Kailee', nameNum: 1004 },
-  { firstName: 'Jacie', nameNum: 1005 } ]
+ ]
 
   module.exports = firstName;
