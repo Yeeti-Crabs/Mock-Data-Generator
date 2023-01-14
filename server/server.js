@@ -1,7 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const app = express()
-const apiRouter = require('./apiRouter.js')
+const apiRouter = require('./routers/apiRouter.js')
 const PORT = process.env.PORT || 3000
 
 const MONGO_URI = 'mongodb+srv://user:user@our-mockdata-storage.ghivuab.mongodb.net/?retryWrites=true&w=majority';
