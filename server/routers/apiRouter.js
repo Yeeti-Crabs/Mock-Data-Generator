@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router(); 
-const dbController  = require('../controllers/dbController')
+const dbController  = require('../controllers/dbController');
 
 /* User will input amount of names desired 
 req.params =
@@ -10,8 +10,8 @@ req.params =
 Should return 
 */
 
-router.get('/', dbController.getNames, (req, res) => {
-  return res.status(200).json(res.locals.firstLastName)
+router.get('/', dbController, (req, res) => {
+  return res.status(200).json(res.locals.data)
   // return res.status(200).send('success, made it here')
 });
 

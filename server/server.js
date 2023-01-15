@@ -37,7 +37,7 @@ app.use((err, req, res, next) => {
     res.redirect(err.url)
   }
   const errorObj = Object.assign({}, defaultErr, err);
-  console.log(errorObj.log);
+  console.error(errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
 });
 
