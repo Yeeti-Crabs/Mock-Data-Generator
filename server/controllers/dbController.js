@@ -116,16 +116,26 @@ const getLastNames = (req, res, next) => {
 const getEmails = (req, res, next) => {
   const {email, firstName, lastName,  fullName, fullNameMiddle, quantity } 
     = req.query;
-  if (!lastName && !fullName && !fullNameMiddle) return next();
+  if (!email) return next();
 
-  
-
-
+  for (let i = 0; i < quantity; i++) {
+    let emailString = '';
+    const emailLength = Math.floor(Math.random() * 14 + 1);
+    
+    for (let i = 0; i < emailLength; i++) {
+      emailString += String.fromCharCode(Math.floor(Math.random() * 123 + 48));
+    }
+    emailString = emailString.replace(/[^0-9A-Za-z]/g, '');
+    emailString += '@yeticrabs.com';
+    res.locals.data.push(emailString);
+  }
+  return next();
 };
 
 dbController.push(makeLocals);
 dbController.push(getFirstNames);
 dbController.push(getMiddleNames);
 dbController.push(getLastNames);
+dbController.push(getEmails);
 
 module.exports = dbController;
