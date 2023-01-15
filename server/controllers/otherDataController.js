@@ -31,9 +31,9 @@ otherDataController.getEmail = (req, res, next ) =>{
 }
 
 otherDataController.getPhoneNum = (req, res, next) => {
-  // if phone query is false move on
+  // if phone query is true start generating
   if(req.query.phone === 'true'){ 
-    const phoneNumGen = () => {
+    const phoneNumGen = () => { // generates phone num
       let phone = ''
       for(let i = 0; i < 10; i++){
         phone = phone + Math.floor(Math.random()*10);
