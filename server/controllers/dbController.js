@@ -1,6 +1,5 @@
 const { FirstName, LastName } = require('../models');
 
-
 const dbController = {};
 
 dbController.getNames = (req, res, next) => {
@@ -35,7 +34,7 @@ dbController.getNames = (req, res, next) => {
                 }
                 allNames.push(userData)
             }
-            res.locals.firstLastName = allNames;
+            res.locals.data = allNames;
             return next()
         })
         .catch((err) => {
