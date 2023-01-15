@@ -13,12 +13,25 @@ const lastNameSchema = new mongoose.Schema ({
     nameNum: {type: Number, default: lastNameNumber++}
 });
 
+const countrySchema = new mongoose.Schema(
+  {
+    country: {type: String, required: true}
+  },
+  {
+      collection: "country"
+  }
+);
+
+
 const FirstName = mongoose.model('firstName', firstNameSchema);
 const LastName = mongoose.model('lastName', lastNameSchema);
+const Country = mongoose.model('country', countrySchema);
+
 
 module.exports = {
     FirstName,
-    LastName
+    LastName,
+    Country,
   };
 
 

@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 3000
 
 const MONGO_URI = 'mongodb+srv://user:user@our-mockdata-storage.ghivuab.mongodb.net/?retryWrites=true&w=majority';
 
+
 // account for incoming data
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))

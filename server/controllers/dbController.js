@@ -1,5 +1,4 @@
-const { FirstName, LastName } = require('../models');
-
+const { FirstName, LastName, Country } = require("../models");
 
 const dbController = {};
 
@@ -9,53 +8,50 @@ dbController.getNames = (req, res, next) => {
 
   const numsGenerator = (ourQuant) => {
     const newArr = [];
-    for (let i = 0; i < ourQuant; i++){
-      const rand = Math.floor(Math.random()*1003)
+    for (let i = 0; i < ourQuant; i++) {
+      const rand = Math.floor(Math.random() * 1003);
       newArr.push(rand);
     }
-    return newArr
+    return newArr;
   };
-  
+
   //find first set on numbers
   const randNums1 = numsGenerator(quantity);
   const randNums2 = numsGenerator(quantity);
-  
-  FirstName.find({ nameNum: { $in: randNums1 } }, 
-    { firstName: 1, _id: 0, })
-    .then((data) => {
 
-      LastName.find({ nameNum: { $in: randNums2 } }, 
-        { lastName: 1, _id: 0, })
+  FirstName.find({ nameNum: { $in: randNums1 } }, { firstName: 1, _id: 0 })
+    .then((data) => {
+      LastName.find({ nameNum: { $in: randNums2 } }, { lastName: 1, _id: 0 })
         .then((results) => {
-            const allNames = [];
-            for (let i = 0; i < data.length; i++) {
-                const userData = {
-                    firstName: data[i].firstName,
-                    lastName: results[i].lastName
-                }
-                allNames.push(userData)
-            }
-            res.locals.firstLastName = allNames;
-            return next()
+          const allNames = [];
+          for (let i = 0; i < data.length; i++) {
+            const userData = {
+              firstName: data[i].firstName,
+              lastName: results[i].lastName,
+            };
+            allNames.push(userData);
+          }
+          res.locals.firstLastName = allNames;
+          return next();
         })
         .catch((err) => {
-            const newErr = {
-                log: 'error in lastName.find in controller getNames',
-                message: { err: 'problem getting lastNames at this time'}
-            }
-            return next(newErr);
-        })
+          const newErr = {
+            log: "error in lastName.find in controller getNames",
+            message: { err: "problem getting lastNames at this time" },
+          };
+          return next(newErr);
+        });
     })
     .catch((err) => {
       const newErr = {
-        log: 'Error in firstname.find in dbController.getname',
-        message: { err: 'Error: problem getting first names'}
-     }
-     return next(newErr)
-    })
-    
+        log: "Error in firstname.find in dbController.getname",
+        message: { err: "Error: problem getting first names" },
+      };
+      return next(newErr);
+    });
+};
 
-//   LastName.find({ nameNum: { $in: randNums2 } }, 
+//   LastName.find({ nameNum: { $in: randNums2 } },
 //     { lastName: 1, _id: 0, })
 //     .then((data) => {
 //         console.log('lastNames from find: ', data)
@@ -72,6 +68,17 @@ dbController.getNames = (req, res, next) => {
 //         }
 //         return next(newErr);
 //     })
-}
+
+dbController.randomCountry = (req, res, next) => {
+  Country.aggregate([
+    { $sample: { size: 3 } },
+    { $project: { country: 1, _id: 0 } },
+  ])
+    .then((data) => {
+      console.log("line 80", data);
+      return next();
+    })
+    .catch((err) => console.log(err));
+};
 
 module.exports = dbController;
