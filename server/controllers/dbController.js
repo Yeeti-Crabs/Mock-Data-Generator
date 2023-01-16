@@ -51,25 +51,8 @@ dbController.getNames = (req, res, next) => {
     });
 };
 
-//   LastName.find({ nameNum: { $in: randNums2 } },
-//     { lastName: 1, _id: 0, })
-//     .then((data) => {
-//         console.log('lastNames from find: ', data)
-//         for (let i = 0; i < allNames.length; i++) {
-//             allNames[i]['lastName'] = data[i].lastName;
-//         }
-//         res.locals.firstLastName = allNames;
-//         return next()
-//     })
-//     .catch((err) => {
-//         const newErr = {
-//             log: 'error in lastName.find in controller getNames',
-//             message: { err: 'problem getting lastNames at this time'}
-//         }
-//         return next(newErr);
-//     })
-
 dbController.randomCountry = (req, res, next) => {
+  // aggregate to get one random data from Country collection
   Country.aggregate([
     { $sample: { size: 3 } },
     { $project: { country: 1, _id: 0 } },

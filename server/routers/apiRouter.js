@@ -10,7 +10,7 @@ req.params =
 Should return 
 */
 
-router.get('/', dbController.getNames, (req, res) => {
+router.get('/', dbController.randomCountry, (req, res) => {
   return res.status(200).json(res.locals.firstLastName)
   // return res.status(200).send('success, made it here')
 });
