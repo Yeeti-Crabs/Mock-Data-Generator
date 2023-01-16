@@ -32,6 +32,7 @@ const MainContainer = () => {
     //   setDataTypeList(dataTypeList.filter((element) => {})
     // }
     console.log(event)
+    console.log('i added this to test something')
   }
 
  
