@@ -1,17 +1,11 @@
 import React from 'react'
+import NewDataType from './NewDataType.jsx'
 
-
-const DataSelector = () => { 
+export default function DataSelector({ dataTypes, handleDelete }) {
+  
   return (
-    <div>
-    <select>
-       <option value="fullName">Full Name</option>
-        <option value="email">Email</option>
-        <option value="phone">Phone Number</option>
-    </select>
-    <button>X</button>
-    </div>
+    dataTypes.map(dataType => {
+      return <NewDataType key={dataType.key} dataType={dataType} handleDelete={handleDelete} />
+    })
   )
 }
-
-export default DataSelector;
