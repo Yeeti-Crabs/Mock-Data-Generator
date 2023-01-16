@@ -4,15 +4,16 @@
  */
 
 import React from 'react';
-import MainContainer from './containers/MainContainer.jsx'
-
+import MainContainer from './containers/mainContainer.jsx'
+import HeaderContainer from './containers/headerContainer.jsx'
+// import FooterContainer from './containers/footerContainer.jsx'
 
 const App = () => {
   return (
     <div>
       <HeaderContainer />
       <MainContainer />
-      <FooterContainer />
+      {/* <FooterContainer /> */}
     </div>
   );
 };
