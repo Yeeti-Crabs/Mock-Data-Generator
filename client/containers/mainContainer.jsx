@@ -68,7 +68,7 @@ const MainContainer = () => {
       <input ref={quantInput} id="quantity_selector" type="number" />
       <select ref={dataInput} name="dataSelect" id="dataSelect">
         <option value="firstName">First Name</option>
-        <option value="fullname">Full Name</option>
+        <option value="fullName">Full Name</option>
         <option value="fullNameMiddle">First Middle Last Name</option>
         <option value="email">Email</option>
         <option value="phoneNumber">Phone Number</option>
