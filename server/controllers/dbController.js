@@ -9,8 +9,7 @@ const numsGenerator = (ourQuant) => {
   return numsArr;
 };
 
-//create res.locals.data
-const makeLocals = (req, res, next) => {
+const makeArray = (req, res, next) => {
   res.locals.data = [];
   return next();
 }
@@ -24,9 +23,11 @@ const getFirstNames = (req, res, next) => {
   FirstName.find({ nameNum: { $in: randNums } }, 
     { 'firstName': 1, _id: 0, })
     .then((data) => {
+      tempArr = [...res.locals.data];
       for (let i = 0; i < data.length; i++) {
-        res.locals.data.push(data[i]);
+        tempArr.push(data[i]);
       }
+      res.locals.data = tempArr;
       return next();
     })
     .catch((err) => {
@@ -47,16 +48,16 @@ const getMiddleNames = (req, res, next) => {
   FirstName.find({ nameNum: { $in: randNums } }, 
     { 'firstName': 1, _id: 0, })
     .then((data) => {
-      const newArr = [];
-      for (let i = 0; i < data.length; i++) {
-        const newObj = {
-          firstName: res.locals.data[i].firstName,
-          middleName: data[i].firstName 
+      const tempArr = [...res.locals.data];
+        for (let i =0; i < data.length; i++) {
+          tempArr[i] = {
+            ...tempArr[i]._doc,
+            middleName: data[i].firstName
+          };
         }
-        newArr.push(newObj);
-      }
-      res.locals.data = newArr;
-      return next();
+        res.locals.data = tempArr;
+        console.log(res.locals.data[0]);
+        return next();
     })
     .catch((err) => {
       const newErr = {
@@ -77,31 +78,27 @@ const getLastNames = (req, res, next) => {
   LastName.find({ nameNum: { $in: randNums } }, 
     { 'lastName': 1, _id: 0, })
     .then((data) => {
-      const newArr = [];
-      for (let i = 0; i < data.length; i++) {
-        if (fullNameMiddle) {
-          const newObj = {
-            firstName: res.locals.data[i].firstName,
-            middleName: res.locals.data[i].middleName,
-            lastName: data[i].lastName 
-          };
-          newArr.push(newObj);
+      const tempArr = [...res.locals.data];
+      if (fullNameMiddle) {
+        for (let i = 0; i < data.length; i++) {
+          tempArr[i] = {
+            ...tempArr[i],
+            lastName: data[i].lastName
+          }
         }
-        else if (fullName || (lastName && firstName)) {
-          const newObj = {
-            firstName: res.locals.data[i].firstName,
-            lastName: data[i].lastName 
-          };
-          newArr.push(newObj);
+      } else if (firstName || fullName) {
+        for (let i = 0; i < data.length; i++) {
+          tempArr[i] = {
+            ...tempArr[i]._doc,
+            lastName: data[i].lastName
+          }
         }
-        else {
-          const newObj = {
-            lastName: data[i].lastName 
-          };
-          newArr.push(newObj);
+      } else {
+        for (let i = 0; i < data.length; i++) {
+          tempArr.push(data[i]);
         }
       }
-      res.locals.data = newArr;
+      res.locals.data = tempArr;
       return next();
     })
     .catch((err) => {
@@ -114,28 +111,80 @@ const getLastNames = (req, res, next) => {
 };
 
 const getEmails = (req, res, next) => {
-  const {email, firstName, lastName,  fullName, fullNameMiddle, quantity } 
-    = req.query;
+  const { email, firstName, lastName,  fullName, fullNameMiddle, quantity } = req.query;
   if (!email) return next();
-
+  const tempArr = [...res.locals.data];
   for (let i = 0; i < quantity; i++) {
     let emailString = '';
-    const emailLength = Math.floor(Math.random() * 14 + 1);
+    const emailLength = Math.floor(Math.random() * 31 + 5);
     
     for (let i = 0; i < emailLength; i++) {
       emailString += String.fromCharCode(Math.floor(Math.random() * 123 + 48));
     }
+
     emailString = emailString.replace(/[^0-9A-Za-z]/g, '');
     emailString += '@yeticrabs.com';
-    res.locals.data.push(emailString);
+
+    if ((firstName && !lastName) || (!firstName && lastName)) {
+      tempArr[i] = {
+        ...tempArr[i]._doc,
+        email: emailString
+      }
+    }else if ((firstName&&lastName) ||fullName || fullNameMiddle) {
+      tempArr[i] = {
+        ...tempArr[i],
+        email:emailString
+      }
+    } else {
+        const newObj = {
+          email: emailString
+        };
+        tempArr.push(newObj);
+    }
   }
+  res.locals.data = tempArr;
   return next();
 };
 
-dbController.push(makeLocals);
+const getPhoneNumbers = (req, res, next) => {
+  const { phoneNumber, email, firstName, lastName, fullName, fullNameMiddle, quantity } = req.query;
+  if (!phoneNumber) return next();
+  const tempArr = [...res.locals.data];
+  
+  for (let i = 0; i < quantity; i++) {
+    let phoneNumString = '';
+    for (let i = 0; i < 10; i++) {
+      if (i===0) phoneNumString += '(';
+      phoneNumString += Math.floor(Math.random() * 10);
+      if (i===2) phoneNumString += ')';
+      if (i===5) phoneNumString += '-';
+    }
+    if ((firstName && !lastName) || (!firstName && lastName)) {
+      tempArr[i] = {
+        ...tempArr[i]._doc,
+        phoneNumber: phoneNumString
+      }
+    }else if ((firstName&&lastName) || fullName || fullNameMiddle || email) {
+      tempArr[i] = {
+        ...tempArr[i],
+        phoneNumber: phoneNumString
+      }
+    } else {
+        const newObj = {
+          phoneNumber: phoneNumString
+        };
+        tempArr.push(newObj);
+    }
+  }
+  res.locals.data = tempArr;
+  return next();
+};
+
+dbController.push(makeArray);
 dbController.push(getFirstNames);
 dbController.push(getMiddleNames);
 dbController.push(getLastNames);
 dbController.push(getEmails);
+dbController.push(getPhoneNumbers);
 
 module.exports = dbController;
