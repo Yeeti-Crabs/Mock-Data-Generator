@@ -10,6 +10,14 @@ const MONGO_URI = 'mongodb+srv://user:user@our-mockdata-storage.ghivuab.mongodb.
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
+// deal with cors headers
+app.use((req, res, next) => {
+  res.append('Access-Control-Allow-Origin', ['*']);
+  res.append('Access-Control-Allow-Methods', 'GET,PUT,PATCH,POST,DELETE');
+  res.append('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
+
 // connection to mongo db
 mongoose.set("strictQuery", false)
 mongoose.connect(MONGO_URI, {

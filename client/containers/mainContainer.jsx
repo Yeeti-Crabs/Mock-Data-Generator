@@ -6,12 +6,14 @@
 import React, { useEffect, useState, useRef } from 'react';
 import DataSelector from '../components/DataSelector.jsx'
 import { v4 as uuidv4 } from 'uuid'
+import axios from 'axios'
 
 const MainContainer = () => {
 
   const [dataTypes, setDataTypes] = useState([])
   const dataInput = useRef()
   const quantInput = useRef()
+  const textAreaInput = useRef()
 
   function handleAdd(event) {
     const typeOfData = dataInput.current.value;
@@ -41,13 +43,24 @@ const MainContainer = () => {
     })
   }
 
-  // function handleSubmit(event) {
+  function handleSubmit(event) {
+    const stateData = dataTypes
+    const quantity = quantInput.current.value
+    let fetchString = `http://localhost:3000/api?quantity=${quantity}`
 
-  // }
+    stateData.forEach((element) => {
+      fetchString += `&${element.type}=true`
+    })
 
-  // const sampleArr = [1,2,3,4,5,6,7,8]
-  // const updatedArr = sampleArr.filter((element) => element !== 7)
-  // updatedArr
+    console.log(fetchString)
+
+    axios.get(fetchString)
+    .then((response) => {
+      console.log('data here: ', response)
+      textAreaInput.current.value = JSON.stringify(response.data)
+    })
+    .catch((err) => console.log('something wrong with axios request', err))
+  }
 
   return (
     <div id="main_container">
@@ -66,8 +79,8 @@ const MainContainer = () => {
       </div>
       {/* make a button to add new DataType */}
       <button id='add_button' onClick={handleAdd} >Add Data Type</button>
-        <button id="submit_button"  >Generate Data</button>
-        <textarea id="text_output"></textarea>
+        <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
+        <textarea ref={textAreaInput} id="text_output"></textarea>
     </div>
   )
 };
