@@ -90,58 +90,78 @@ const getLastNames = (req, res, next) => {
 };
 
 const getEmails = (req, res, next) => {
-  const { email, quantity } = req.query;
-  if (!email) return next();
-  const tempArr = [...res.locals.data];
-  for (let i = 0; i < quantity; i++) {
-    let emailString = '';
-    const emailLength = Math.floor(Math.random() * 31 + 5);
-    
-    for (let i = 0; i < emailLength; i++) {
-      emailString += String.fromCharCode(Math.floor(Math.random() * 123 + 48));
-    }
-
-    emailString = emailString.replace(/[^0-9A-Za-z]/g, '');
-    emailString += '@yeticrabs.com';
-
-    if (tempArr[i]) {
-      tempArr[i].email = emailString;
-    } else {
-      const newObj = {
-        email: emailString
+  try{
+    const { email, quantity } = req.query;
+    if (!email) return next();
+    const tempArr = [...res.locals.data];
+    for (let i = 0; i < quantity; i++) {
+      let emailString = '';
+      const emailLength = Math.floor(Math.random() * 31 + 5);
+      
+      for (let i = 0; i < emailLength; i++) {
+        emailString += String.fromCharCode(Math.floor(Math.random() * 123 + 48));
       }
-      tempArr.push(newObj);
+      
+      emailString = emailString.replace(/[^0-9A-Za-z]/g, '');
+      emailString += '@yeticrabs.com';
+      
+      if (tempArr[i]) {
+        tempArr[i].email = emailString;
+      } else {
+        const newObj = {
+          email: emailString
+        }
+        tempArr.push(newObj);
+      }
     }
+    res.locals.data = tempArr;
+    return next();
   }
-  res.locals.data = tempArr;
-  return next();
+  catch {((err) => {
+    const newErr = {
+        log: 'error in getEmails',
+        message: { err: 'problem getting emails at this time'}
+    }
+    return next(newErr);
+  })
+  }
 };
 
 const getPhoneNumbers = (req, res, next) => {
-  const { phoneNumber, quantity } = req.query;
-  if (!phoneNumber) return next();
-  const tempArr = [...res.locals.data];
-  
-  for (let i = 0; i < quantity; i++) {
-    let phoneNumString = '';
-    for (let i = 0; i < 10; i++) {
-      if (i===0) phoneNumString += '(';
-      phoneNumString += Math.floor(Math.random() * 10);
-      if (i===2) phoneNumString += ') ';
-      if (i===5) phoneNumString += '-';
-    }
-    if (tempArr[i]) {
-      tempArr[i].phoneNumber = phoneNumString
-    } else {
-      const newObj = {
-        phoneNumber: phoneNumString
+  try {
+    const { phoneNumber, quantity } = req.query;
+    if (!phoneNumber) return next();
+    const tempArr = [...res.locals.data];
+    
+    for (let i = 0; i < quantity; i++) {
+      let phoneNumString = '';
+      for (let i = 0; i < 10; i++) {
+        if (i===0) phoneNumString += '(';
+        phoneNumString += Math.floor(Math.random() * 10);
+        if (i===2) phoneNumString += ') ';
+        if (i===5) phoneNumString += '-';
       }
-      tempArr.push(newObj);
+      if (tempArr[i]) {
+        tempArr[i].phoneNumber = phoneNumString
+      } else {
+        const newObj = {
+          phoneNumber: phoneNumString
+        }
+        tempArr.push(newObj);
+      }
     }
+    res.locals.data = tempArr;
+    return next();
   }
-  res.locals.data = tempArr;
-  return next();
-};
+  catch {((err) => {
+    const newErr = {
+        log: 'error in getPhoneNumbers',
+        message: { err: 'problem getting phone numbers at this time'}
+    }
+    return next(newErr);
+  })
+  }
+  };
 
 const getCountry = (req, res, next) => {
   const { country, quantity } = req.query;

@@ -63,6 +63,10 @@ const MainContainer = () => {
     .catch((err) => console.log('something wrong with axios request', err))
   }
 
+  function handleCopy(event) {
+    navigator.clipboard.writeText(textAreaInput.current.value)
+  }
+
   return (
     <div id="main_container">
       <label id='quantity_selector-label'>Quantity:
@@ -84,9 +88,11 @@ const MainContainer = () => {
         <button id='add_button' onClick={handleAdd} >Add Data Type</button>
         <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
       </div>
-      <textarea ref={textAreaInput} id="text_output">
-      </textarea>
-      <button id='copy'><img src='../copyIcon.svg' alt="copy to clipboard" /></button>
+      <div id= 'text_box_and_copy'>
+        <textarea ref={textAreaInput} id="text_output">
+        </textarea>
+        <button id='copy' onClick={handleCopy} ><img src='../copyIcon.svg' alt="copy to clipboard" /></button>
+      </div>
     </div>
   )
 };
