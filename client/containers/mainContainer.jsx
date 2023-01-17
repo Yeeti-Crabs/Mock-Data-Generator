@@ -35,7 +35,6 @@ const MainContainer = () => {
       }
 
     })
-    console.log(typeOfData);
   }
 
   function handleDelete(theKey) {
@@ -49,6 +48,7 @@ const MainContainer = () => {
     const quantity = quantInput.current.value
     let fetchString = `http://localhost:3000/api?quantity=${quantity}`
 
+    // build our url for the 
     stateData.forEach((element) => {
       fetchString += `&${element.type}=true`
     })
@@ -57,7 +57,6 @@ const MainContainer = () => {
 
     axios.get(fetchString)
     .then((response) => {
-      console.log('data here: ', response)
       textAreaInput.current.value = JSON.stringify(response.data)
     })
     .catch((err) => console.log('something wrong with axios request', err))
@@ -69,23 +68,27 @@ const MainContainer = () => {
 
   return (
     <div id="main_container">
-      <label id='quantity_selector-label'>Quantity:
-        <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
-      </label>
-      <select ref={dataInput} name="dataSelect" id="dataSelect">
-        <option value="firstName">First Name</option>
-        <option value="fullName">Full Name</option>
-        <option value="fullNameMiddle">First Middle Last Name</option>
-        <option value="email">Email</option>
-        <option value="phoneNumber">Phone Number</option>
-        <option value="country">Country</option>
-      </select>
+      <div id='form'>
+        <label id='quantity_selector-label'> Quantity:
+          <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
+        </label>
+        <select ref={dataInput} name="dataSelect" id="dataSelect">
+          <option value="firstName">First Name</option>
+          <option value="fullName">Full Name</option>
+          <option value="fullNameMiddle">First Middle Last Name</option>
+          <option value="email">Email</option>
+          <option value="phoneNumber">Phone Number</option>
+          <option value="country">Country</option>
+        </select>
+        <button id='add_button' onClick={handleAdd} >Add Data Type</button>
+      </div>
+      
       <div id="datatype_selector">
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
       </div>
       {/* make a button to add new DataType */}
       <div id = 'add_and_submit'>
-        <button id='add_button' onClick={handleAdd} >Add Data Type</button>
+       
         <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
       </div>
       <div id= 'text_box_and_copy'>

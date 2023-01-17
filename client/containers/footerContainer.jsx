@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 const FooterContainer = () => { 
     return (
       <footer>
-        <p>Yeti Crabs Inc.</p>
+        <a href='https://github.com/Yeeti-Crabs' target="_blank"> Yeti Crabs Inc.</a>
       </footer>
     )
 }

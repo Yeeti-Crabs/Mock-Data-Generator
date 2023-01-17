@@ -50,11 +50,12 @@ table {
 
 /* ----------------------CONTAINERS----------------- */
 
-body{
+body, #root{
   padding: 0%;
   margin: 0%;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   height: 100vh;
+  width: 100vw;
 }
 #root-child{
   position: relative;
@@ -84,7 +85,7 @@ body{
   color: white;
 }
 h1{
-  
+  font-size: 2rem;
 }
 footer{
   position: relative;
@@ -110,8 +111,11 @@ footer{
 /*------------------ FORMS ----------------- */
 
 #datatype_selector {
+  display: grid;
   padding: 1rem;
-  height: 30%
+  height: 30%;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: repeat(3, 1fr);
 }
 
 #new_data_type{
@@ -124,11 +128,13 @@ footer{
   border-radius: 5px;
   display: flex;
   margin: .5rem;
-  padding: .5rem 
+  padding: .5rem; 
+  color: rgb(60, 60, 60)
 }
 #new_data_type > button{
   border: none;
-  background-color:#fdebd3
+  background-color:#fdebd3;
+  
 }
 #text_box_and_copy{
   height: 80%;
@@ -138,14 +144,39 @@ footer{
   width:100%;
   height:100%;
 }
+#form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
 
-#copy{
-  position: absolute;
-  z-index: 10000;
-  top: 5px;
-  right:0px;
-  width: 2rem;
+#dataSelect{
   height: 2rem;
+  width: 50%
+}
+#quantity_selector{
+  height: 1.5rem;
+  margin-left: 0.5rem;
+}
+a{
+  text-decoration: none;
+  color: #264e70;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+ body{
+  align-items: center;
+ }
+  #form{
+  flex-direction: column;
+ }
+  #main_container{
+    width: 80vw
+  }
 }
 
 /* ---------------------BUTTONS--------------------- */
@@ -175,18 +206,28 @@ button:active{
   border: 1px solid black
 }
 
+#copy{
+  position: absolute;
+  z-index: 10000;
+  top: 5px;
+  right:0px;
+  width: 2rem;
+  height: 2rem;
+}
 
 
 /* X Button styling */
 .X-button {
-  color: black;
+
+  color: rgb(60, 60, 60);
+ 
   transition: all 125ms linear;
 }
 
 .X-button:hover {
-  color: red;
+  color: #679186;
   cursor: pointer;
-  text-shadow: red 1px 0 1px;
+  text-shadow: #679186 1px 0 1px;
   transform: scale(1.2);
 }
 
