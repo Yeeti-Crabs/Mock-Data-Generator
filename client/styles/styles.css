@@ -166,7 +166,14 @@ button{
 /* X Button styling */
 .X-button {
   color: black;
-  
+  transition: all 125ms linear;
+}
+
+.X-button:hover {
+  color: red;
+  cursor: pointer;
+  text-shadow: red 1px 0 1px;
+  transform: scale(1.2);
 }
 
 
