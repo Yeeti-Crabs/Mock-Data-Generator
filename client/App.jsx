@@ -6,14 +6,14 @@
 import React from 'react';
 import MainContainer from './containers/mainContainer.jsx'
 import HeaderContainer from './containers/headerContainer.jsx'
-// import FooterContainer from './containers/footerContainer.jsx'
+import FooterContainer from './containers/footerContainer.jsx'
 
 const App = () => {
   return (
-    <div>
+    <div id = 'root-child'>
       <HeaderContainer />
       <MainContainer />
-      {/* <FooterContainer /> */}
+      <FooterContainer />
     </div>
   );
 };

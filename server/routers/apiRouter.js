@@ -1,18 +1,11 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router(); 
-const dbController  = require('../controllers/dbController')
+const dbController = require('../controllers/dbController')
 
-/* User will input amount of names desired 
-req.params =
- {
-  quanity: 1-1002
- }
-Should return 
-*/
+// dbController is an array of all of our controller functions, NOT an object with controller methods
 
-router.get('/', dbController.getNames, (req, res) => {
-  return res.status(200).json(res.locals.firstLastName)
-  // return res.status(200).send('success, made it here')
+router.get('/', dbController, (req, res) => {
+  return res.status(200).json(res.locals.data)
 });
 
 module.exports = router;
