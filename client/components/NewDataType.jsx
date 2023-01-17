@@ -7,7 +7,7 @@ export default function NewDataType({ dataType, handleDelete }) {
     }
 
   return (
-    <div>
+    <div id = 'new_data_type'>
         {dataType.type}
         <button onClick={handlePressedDelete}>X</button>
     </div>

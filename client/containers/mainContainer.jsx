@@ -7,6 +7,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import DataSelector from '../components/DataSelector.jsx'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
+import copyIcon from '../copyIcon.svg'
 
 const MainContainer = () => {
 
@@ -64,8 +65,9 @@ const MainContainer = () => {
 
   return (
     <div id="main_container">
-      <label id='quantity_selector'>Quantity:</label>
-      <input ref={quantInput} id="quantity_selector" type="number" />
+      <label id='quantity_selector-label'>Quantity:
+        <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
+      </label>
       <select ref={dataInput} name="dataSelect" id="dataSelect">
         <option value="firstName">First Name</option>
         <option value="fullName">Full Name</option>
@@ -78,9 +80,13 @@ const MainContainer = () => {
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
       </div>
       {/* make a button to add new DataType */}
-      <button id='add_button' onClick={handleAdd} >Add Data Type</button>
+      <div id = 'add_and_submit'>
+        <button id='add_button' onClick={handleAdd} >Add Data Type</button>
         <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
-        <textarea ref={textAreaInput} id="text_output"></textarea>
+      </div>
+      <textarea ref={textAreaInput} id="text_output">
+      </textarea>
+      <button id='copy'><img src='../copyIcon.svg' alt="copy to clipboard" /></button>
     </div>
   )
 };

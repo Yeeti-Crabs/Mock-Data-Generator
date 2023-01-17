@@ -10,7 +10,7 @@ import FooterContainer from './containers/footerContainer.jsx'
 
 const App = () => {
   return (
-    <div>
+    <div id = 'root-child'>
       <HeaderContainer />
       <MainContainer />
       <FooterContainer />

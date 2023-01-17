@@ -2,7 +2,9 @@ import React, {useState} from 'react';
 
 const FooterContainer = () => { 
     return (
-      <p>Yeti Crabs Inc.</p>
+      <footer>
+        <p>Yeti Crabs Inc.</p>
+      </footer>
     )
 }
 
