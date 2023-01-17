@@ -1,5 +1,6 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const path = require('path')
 const app = express()
 const apiRouter = require('./routers/apiRouter.js')
 const PORT = process.env.PORT || 3000
@@ -17,6 +18,15 @@ app.use((req, res, next) => {
   res.append('Access-Control-Allow-Headers', 'Content-Type');
   next();
 });
+
+app.use(express.static(path.join(__dirname, '../build')));
+
+app.use(express.static(path.join(__dirname, '../client')));
+
+// on request, send our html
+// app.get((req, res) => {
+//   res.sendFile(path.resolve(__dirname, 'build', 'index.html'))
+// })
 
 // connection to mongo db
 mongoose.set("strictQuery", false)
