@@ -48,12 +48,10 @@ const MainContainer = () => {
     const quantity = quantInput.current.value
     let fetchString = `http://localhost:3000/api?quantity=${quantity}`
 
-    // build our url for the 
+    // build our url with all of the datatypes in the query string
     stateData.forEach((element) => {
       fetchString += `&${element.type}=true`
     })
-
-    console.log(fetchString)
 
     axios.get(fetchString)
     .then((response) => {
