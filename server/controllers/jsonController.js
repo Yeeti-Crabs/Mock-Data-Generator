@@ -10,6 +10,11 @@ function rng (length){
 
 const jsonController  = {};
 
+
+function rng (length){
+  return Math.floor(Math.random()*length)
+}
+
 jsonController.makeArray = (req, res, next) =>{
   res.locals.data = []
   return next();
@@ -47,3 +52,5 @@ jsonController.getFirstName = (req, res, next) => {
     //  return next(newErr)
     // })
 }
+
+module.exports = jsonController

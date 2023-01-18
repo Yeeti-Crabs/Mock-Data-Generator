@@ -8,10 +8,10 @@ const {setCookie, setSSIDCookie} = require('../controllers/cookieController')
 
 const {makeArray, getFirstName } = require('../controllers/jsonController')
 // dbController is an array of all of our controller functions, NOT an object with controller methods
-const Profile = require('../authModels')
+const Profile = require('../models/authModels')
 // const controllers = [makeArray, getFirstNames, getMiddleNames, getLastNames, getCountry, getEmails, getPhoneNumbers]
-
-router.get('/', makeArray, getFirstName, (req, res) => {
+const controllers  = [makeArray, getFirstName, getEmails, getPhoneNumbers]
+router.get('/',  controllers ,(req, res) => {
   return res.status(200).json(res.locals.data)
 });
 
