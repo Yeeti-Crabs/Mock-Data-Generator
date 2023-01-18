@@ -14,12 +14,12 @@ const SignUp = () => {
   const handleSignUp = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('/api/users/signup', { username, password });
+      const response = await axios.post('/api/signup', { username, password });
       console.log(response);
       if (response) navigate('/dashboard');
     } catch (err) {
       setError('Invalid Username/Password');
-      console.log('err:', err)
+      console.log('err:', err);
     }
   };
 

@@ -14,7 +14,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(`/api/users/login`, { username, password });
+      const response = await axios.post(`/api/login`, { username, password });
       console.log(response);
       if (response) navigate('/dashboard');
     } catch (err) {
