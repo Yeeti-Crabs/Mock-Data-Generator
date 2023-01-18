@@ -1,4 +1,4 @@
-const { FirstName, LastName, Country } = require('../models');
+const { FirstName, LastName, Country } = require('../models/models');
 // const dbController = [];
 
 const dbController = {};
