@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-export default SignUp = (props) => {
-  const { setUser } = props;
+export default SignUp = () => {
 
   // useState to update and track the input fields from the signup page
   const [username, setUsername] = useState('');
@@ -17,11 +16,7 @@ export default SignUp = (props) => {
     try {
       const response = await axios.post('/api/users/signup', { username, password });
       console.log(response);
-      if (response) {
-        // testing
-        // setUser('test');
-        navigate('/dashboard');
-      }
+      if (response) navigate('/dashboard');
     } catch (err) {
       setError('Invalid Username/Password');
       console.log('err:', err)

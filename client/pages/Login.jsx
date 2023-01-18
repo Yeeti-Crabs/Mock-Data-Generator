@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-export default Login = (props) => {
-  const { setUser } = props;
-  
+export default Login = () => {
+
   // useState to update and track the input fields from the login page
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -18,8 +17,6 @@ export default Login = (props) => {
       const response = await axios.post(`/api/users/login`, { username, password });
       console.log(response);
       if (response) navigate('/dashboard');
-      // setUser('test');
-      navigate('/dashboard');
     } catch (err) {
       setError('Invalid Username/Password');
       console.log('err:', err)

@@ -2,12 +2,12 @@
  * @module App.jsx
  * @description Top level of React App.
  */
-
-import React, { useState } from 'react';
-import Login from './pages/Login';
-import SignUp from './pages/Signup';
-import Dashboard from './pages/Dashboard';
 import {Route, Routes} from 'react-router-dom';
+import React, { useState } from 'react';
+import Login from './pages/Login.jsx';
+import SignUp from './pages/Signup.jsx';
+import Dashboard from './pages/Dashboard.jsx';
+
 
 export default App = () => {
   const [user, setUser] = useState({});

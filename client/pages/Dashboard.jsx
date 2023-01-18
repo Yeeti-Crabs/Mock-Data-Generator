@@ -5,8 +5,8 @@
 
 import React from 'react';
 import MainContainer from './containers/mainContainer.jsx'
-import HeaderContainer from './containers/headerContainer.jsx'
-import FooterContainer from './containers/footerContainer.jsx'
+import HeaderContainer from '../containers/headerContainer.jsx'
+import FooterContainer from '../containers/footerContainer.jsx'
 
 
 export default Dashboard = () => {
