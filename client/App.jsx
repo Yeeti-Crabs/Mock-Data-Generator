@@ -4,18 +4,20 @@
  */
 
 import React from 'react';
-import MainContainer from './containers/mainContainer.jsx'
-import HeaderContainer from './containers/headerContainer.jsx'
-import FooterContainer from './containers/footerContainer.jsx'
+import Login from './pages/Login';
+import SignUp from './pages/Signup';
+import Dashboard from './pages/Dashboard';
+import {Route, Routes} from 'react-router-dom';
 
-const App = () => {
+export default App = () => {
   return (
-    <div id = 'root-child'>
-      <HeaderContainer />
-      <MainContainer />
-      <FooterContainer />
+    <div id = 'root-child'>   
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+      </Routes>
     </div>
   );
 };
-
-export default App;
