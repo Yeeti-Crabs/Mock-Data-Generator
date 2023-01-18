@@ -71,4 +71,27 @@ userController.verifyUser = async (req, res, next) => {
   }
 };
 
+// update user's starred data types
+userController.updateDataTypes = async (req, res, next) => {
+  try {
+    const id = req.cookies.ssid;
+    const { dataTypes } = req.body;
+    console.log(id, dataTypes);
+    const filter = { _id: id };
+    const update = { starredDataTypes: dataTypes };
+    User.findOneAndUpdate(filter, update, { new: true }).then((data) => {
+      // console.log(data);
+      res.locals.types = data.starredDataTypes;
+      return next();
+    });
+  } catch (err) {
+    return next({
+      log: `userController.addStarredDataTypes: ERROR: ${err}`,
+      message: {
+        err: "Error occured in userController.addStarredDataTypes, check server logs for more details",
+      },
+    });
+  }
+};
+
 module.exports = userController;
