@@ -218,6 +218,7 @@ a:hover{
   width: 10rem;
   height: 2rem;
 }
+
 button{
   width: 1.5rem;
   height: 1.5rem;
@@ -259,7 +260,18 @@ button:active{
   transform: scale(1.2);
 }
 
+.type-grid {
+  display: grid;
+  /* grid-auto-rows: 400px;
+  grid-auto-columns: 2000px; */
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+}
 
+#type-button {
+  width: 10rem;
+  height: 4rem;
+}
 
 
 

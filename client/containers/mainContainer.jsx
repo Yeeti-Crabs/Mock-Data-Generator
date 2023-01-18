@@ -5,7 +5,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import DataSelector from '../components/DataSelector.jsx'
-// import Type from './type.jsx'
+import Type from '../components/type.jsx'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import copyIcon from '../copyIcon.svg'
@@ -88,14 +88,14 @@ const MainContainer = () => {
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
       </div>
 
-      {/* <div className='type-grid'>
+      <div className='type-grid'>
         {types.map(type => (
           <Type
             type={type} 
-            onClick ={handleClick}
+            // onClick ={handleClick}
           />
         ))}
-      </div> */}
+      </div>
 
 
 
