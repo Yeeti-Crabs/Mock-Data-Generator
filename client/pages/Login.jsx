@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-export default Login = () => {
+export default Login = (props) => {
+  const { setUser } = props;
+  
   // useState to update and track the input fields from the login page
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
