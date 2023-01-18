@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
-import DataSelector from '../components/DataSelector.jsx'
+import DataSelector from '../components/dataSelector.jsx'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import copyIcon from '../copyIcon.svg'

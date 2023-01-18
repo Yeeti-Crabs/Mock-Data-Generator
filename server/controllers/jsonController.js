@@ -23,8 +23,8 @@ jsonController.makeArray = (req, res, next) =>{
 jsonController.getFirstName = (req, res, next) => {
   const { firstName, fullName, fullNameMiddle, quantity } = req.query;
   if (!firstName && !fullName && !fullNameMiddle) return next();
+  try{
     const tempArr = [...res.locals.data];
-    console.log(firstNames[rng(firstNames.length)])
     for(let i = 0; i < quantity; i++){
       newObj = {
         firstName: firstNames[[rng(firstNames.length)]]
@@ -33,24 +33,74 @@ jsonController.getFirstName = (req, res, next) => {
     }
     res.locals.data = tempArr;
     return next();
-    // .then((data) => {
-    //   const tempArr = [...res.locals.data];
-    //   for (let i = 0; i < data.length; i++) {
-    //     newObj = {
-    //       firstName: data[i].firstName
-    //     };
-    //     tempArr.push(newObj);
-    //   }
-    //   res.locals.data = tempArr;
-    //   return next();
-    // })
-    // .catch((err) => {
-    //   const newErr = {
-    //     log: 'Error in getFirstNames',
-    //     message: { err: 'Error: problem getting first names'}
-    //  }
-    //  return next(newErr)
-    // })
+  }
+  catch{
+    return next({
+      log: 'error in getFirstNames',
+      message: { err: 'problem getting first Names at this time'}
+    })
+  }
 }
+
+jsonController.getMiddleName = (req, res, next) => {
+  const {fullNameMiddle, quantity } = req.query
+  if (!fullNameMiddle) return next();
+  try{
+    const tempArr = [...res.locals.data];
+    for(let i = 0; i < quantity; i++){
+      tempArr[i]['middleName'] = middleNames[[rng(middleNames.length)]];
+    }
+    res.locals.data = tempArr;
+    return next();
+  }
+  catch{
+    return next({
+      log: 'error in getMiddleName',
+      message: { err: 'problem getting middle Names at this time'}
+    })
+  }
+}
+
+
+jsonController.getlastName = (req, res, next) => {
+  const { lastName, fullName, fullNameMiddle, quantity } = req.query;
+  if (!lastName && !fullName && !fullNameMiddle) return next();
+  try{
+    const tempArr = [...res.locals.data];
+    for(let i = 0; i < quantity; i++){
+      tempArr[i]['lastName'] = lastNames[[rng(lastNames.length)]];
+    }
+    res.locals.data = tempArr;
+    return next();
+  }
+  catch{
+    return next({
+      log: 'error in getLastName',
+      message: { err: 'problem getting Last Names at this time'}
+    })
+  }
+}
+
+jsonController.getCountry = (req, res, next) => {
+  const { country, quantity } = req.query;
+  if (!country) return next();
+  try{
+    const tempArr = [...res.locals.data];
+    for(let i = 0; i < quantity; i++){
+      tempArr[i]['country'] = countries[[rng(countries.length)]].name;
+    }
+    res.locals.data = tempArr;
+    return next();
+  }
+  catch{
+    return next({
+      log: 'error in getCountry',
+      message: { err: 'problem getting countries at this time'}
+    })
+  }
+}
+
+
+
 
 module.exports = jsonController

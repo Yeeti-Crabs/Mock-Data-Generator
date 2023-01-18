@@ -47,6 +47,7 @@
     "mongoose": "^6.8.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.7.0",
     "uuid": "^9.0.0"
   }
 }

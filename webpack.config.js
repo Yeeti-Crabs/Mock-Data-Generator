@@ -10,6 +10,7 @@ module.exports = {
   plugins: [ new HtmlWebpackPlugin({ template: './client/index.html' })],
   mode: process.env.NODE_ENV,
   devServer: {
+    historyApiFallback: true,
     static: {
         directory: path.resolve(__dirname, './client'),
         publicPath: '/'
