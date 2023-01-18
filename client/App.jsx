@@ -16,7 +16,6 @@ export default App = () => {
     <div id = 'root-child'>   
       <Routes>
         <Route path="/" element={<Dashboard user = {user} />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login setUser = {(user) => setUser(user)} />} />
         <Route path="/signup" element={<SignUp setUser = {(user) => setUser(user)} />} />
       </Routes>

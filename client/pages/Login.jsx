@@ -16,7 +16,10 @@ export default Login = (props) => {
     e.preventDefault();
     try {
       const response = await axios.post(`/api/users/login`, { username, password });
+      console.log(response);
       if (response) navigate('/dashboard');
+      // setUser('test');
+      navigate('/dashboard');
     } catch (err) {
       setError('Invalid Username/Password');
       console.log('err:', err)

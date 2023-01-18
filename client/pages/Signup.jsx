@@ -16,10 +16,10 @@ export default SignUp = (props) => {
     e.preventDefault();
     try {
       const response = await axios.post('/api/users/signup', { username, password });
+      console.log(response);
       if (response) {
         // testing
-        console.log(response);
-        setUser('test');
+        // setUser('test');
         navigate('/dashboard');
       }
     } catch (err) {
