@@ -152,7 +152,7 @@ footer{
   display: flex;
   flex-direction: column;
   width: 50%;
-  height:60% 
+  height:70% 
 }
 
 /*------------------ FORMS ----------------- */
@@ -184,9 +184,14 @@ footer{
   
 }
 #text_box_and_copy{
-  height: 80%;
+  height: 80%; 
   position: relative;
+  padding-top : 10em
 }
+/* height: 80%;   change to 60% */
+
+/*add padding-top : 10em*/
+
 #text_output{
   width:100%;
   height:100%;
@@ -258,10 +263,11 @@ button:active{
 #copy{
   position: absolute;
   z-index: 10;
-  top: 5px;
+  top: 13em;
   right:0px;
   width: 2rem;
   height: 2rem;
+  /* padding-top: 10em */
 }
 
 
@@ -294,6 +300,16 @@ button:active{
   font-size: 95%;
 }
 
+#add_to_favorites{
+  width: 7rem;
+  height: 3rem;
+}
+
+button .flipped {
+  color: red;
+  background: red;
+  background-color: red;
+}
 
 
 

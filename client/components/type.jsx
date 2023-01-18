@@ -1,12 +1,15 @@
 import React from 'react'
-import NewDataType from './NewDataType.jsx'
+import '../containers/mainContainer.jsx'
+
 
 export default function Type({type, clicked, handleClick}) {
-
+  const ClickedToggle = () => {
+    handleClick(type);
+  }
 
   return (
     <div >
-            <button id='type-button' onClick={(type) => handleClick(type)}> {type} </button>
+            <button id='type-button' className={clicked ? "clicked" : ""} onClick={ClickedToggle}> {type} </button>
     </div>
   )
 }

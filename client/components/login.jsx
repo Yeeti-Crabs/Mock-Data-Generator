@@ -1,66 +1,24 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios'
 
+import SignUpPage from './signUpPage.jsx';
+import LoginPage from './loginPage.jsx';
+
 const Login = (props) => {
-  const [msg, setMessage] = useState('');
+  // const msg = useRef('test');
+  const [msg, setMsg] = useState();
   const username = useRef() ;
   const password = useRef();
   const passwordR = useRef();
+  const [popUp, setPopUp] = useState(<LoginPage {...{username, password, msg, sendLogin, closeLogin, openSignUp}} />);
   
-  const popUpPage = (
-    <div className="popup">
-      <h1>Login</h1>
-      <form className="loginForm" onSubmit={sendLogin}>
-        <label className="loginLabel">Username:
-          <input type="text" name="username" onChange={e => {username.current = e.target.value}} required />
-        </label>
-        <br/>
-        <label className="loginLabel">Password:
-          <input type="password" id="password" onChange={e => {password.current = e.target.value}} required />
-        </label>
-        <br/>
-        <div className="loginFormBtns">
-          <button type="submit" className="loginBtn" >Login</button>
-          <button type="button" className="loginBtn" onClick={closeLogin}>Play around</button>
-          <button className="button" onClick={openSignUp}>New User</button>
-        </div>
-      </form>
-      <p>{msg}</p>
-    </div>
-  )
-  
-  const signUpPage = (
-    <div className="popup">
-      <h1>Welcome New User!!</h1>
-      <form className="loginForm" onSubmit={sendSignup}>
-        <label className="loginLabel">Username:
-          <input type="text" name="username" onChange={e => {username.current = e.target.value}} required />
-        </label>
-        <br/>
-        <label className="loginLabel">Password:
-          <input type="password" id="password" onChange={e => {password.current = e.target.value}} required />
-        </label>
-        <br/>
-        <label className="loginLabel">Re-enter Password:
-          <input type="password" id="passwordR" onChange={e => {passwordR.current = e.target.value}} required />
-        </label>
-        <div className="loginFormBtns">
-          <button type="submit" className="loginBtn" >Signup</button>
-          <button type="button" className="loginBtn" onClick={openPopUp}>Back to Login</button>
-        </div>
-      </form>
-      <p>{msg}</p>
-    </div>
-  )
 
   const popUpBtn = (
     <div>
-      <button className="popUpBtn" onClick={openPopUp}>Login</button>
+      <button className="popUpBtn" onClick={openLogin}>Login</button>
     </div>
   )
 
-  const [popUp, setPopUp] = useState(popUpPage);
-  
   useEffect(() => {
     const fetchData = async () => {
       try{
@@ -77,12 +35,12 @@ const Login = (props) => {
     setPopUp(popUpBtn);
   }
 
-  function openPopUp() {
+  function openLogin() {
     const inputs = document.querySelectorAll('input');
     inputs.forEach((input) => {
       input.value = '';
     })
-    setPopUp(popUpPage);
+    setPopUp(<LoginPage {...{username, password, msg, sendLogin, closeLogin, openSignUp}} />);
   }
   
   function openSignUp() {
@@ -90,33 +48,54 @@ const Login = (props) => {
     inputs.forEach((input) => {
       input.value = '';
     })
-    setPopUp(signUpPage);
+    setPopUp(<SignUpPage {...{username, password, passwordR, msg, sendSignup, openLogin}} />);
   }
 
   function sendLogin(e) {
     e.preventDefault();
-    console.log('login clicked');
+    const login = async () => {
+      const response = await axios.post('/user/login', { username: username.current, password:password.current })
+      console.log(response);
+    }
+    login();
   }
   
-  async function sendSignup(e) {
+  function sendSignup(e) {
     e.preventDefault();
-    if (password !== passwordR) {
+    console.log('testdone');
+    if (password.current !== passwordR.current) {
       console.log('password doesn\'t match');
-      setMessage('Passwords do not match!');
-      setTimeout(() => {
-        setMessage(''), 3000
-      });
+      setMsg('Passwords do not match!');
+      console.log('after click', msg);
+      // setTimeout(() => {
+      //   setMessage('')
+      // },3000);
       return;
     }
-    const signUp = async () => {
-      const data = await axios.post('/user/signup', { username, password })
-    }
-    const data = await axios.get('/user/login')
-      // if(Object.hasOwn(data, '[dataprop]')) {
-      //   setSession(true);
-      // }
-    console.log(data);
+    // const signUp = async () => {
+    //   const response = await axios.post('/user/signup', { username: username.current, password:password.current })
+    //   console.log(response);
+    // }
+    
+    //   // if(Object.hasOwn(data, '[dataprop]')) {
+    //   //   setSession(true);
+    //   // }
+    // signUp();
   }
+  useEffect(() => {
+    console.log('updated')
+  })
+  console.log(msg);
+  // const fetchUrls = async () => {
+  //   const response = await axios.get("http://localhost:3000/api/sprites");
+  //   // console.log('console.log inside fetchUrls()')
+  //   console.log(response.data)
+  //   for(let i = 0; i < cardImages.length; i++){
+  //       cardImages[i].src = response.data[i].src;
+  //   }
+  //   console.log(cardImages)
+  // }
+
 
   return (
     <>

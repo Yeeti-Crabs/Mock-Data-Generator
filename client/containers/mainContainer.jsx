@@ -12,19 +12,19 @@ import copyIcon from '../copyIcon.svg'
 import Login from '../components/login.jsx'
 
 const MainContainer = () => {
-  const types = ["First Name", "Full Name", "First Middle Last Name", "Email", "Phone Number", "Country"];
+  const types = ["First Name", "Full Name", "First Middle Last Name", "Email", "Phone Number", "Address", "Country", "Password", "Website", "Date"];
   const [dataTypes, setDataTypes] = useState(types.reduce((acc, cur) => {
     acc[cur] = false;
     return acc;
   }, {}))
-
+  const [favorites, setFavorites] = useState([]);
 
   // const [dataTypes, setDataTypes] = useState(types.map(type => {
   //   const obj = {};
   //   obj[type] = false;
   //   return obj;
   // }))
-  console.log(dataTypes);
+  // console.log(dataTypes);
   const dataInput = useRef()
   const quantInput = useRef()
   const textAreaInput = useRef()
@@ -83,14 +83,25 @@ const MainContainer = () => {
   
 
   function handleClick(type) {
-      console.log("Inside handleClick");
+
       if(dataTypes[type] === false){
         setClicked(true);
+        const obj = {};
+        obj[type] = true;
         setDataTypes({
           ...dataTypes, // Copy the old fields
-          type: true // But override this one
+          ...obj // override value for key stored in "type"
         });
-        console.log(dataTypes)
+      }
+
+      else{
+        setClicked(false);
+        const obj = {};
+        obj[type] = false;
+        setDataTypes({
+          ...dataTypes, // Copy the old fields
+          ...obj // But override this one
+        });
       }
   }
 
@@ -99,9 +110,6 @@ const MainContainer = () => {
       
       <Login />
       {/* <div id='form'>
-        <label id='quantity_selector-label'> Quantity:
-          <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
-        </label>
         <select ref={dataInput} name="dataSelect" id="dataSelect">
           <option value="firstName">First Name</option>
           <option value="fullName">Full Name</option>
@@ -127,12 +135,18 @@ const MainContainer = () => {
         ))}
       </div>
 
+      
 
-
-      {/* make a button to add new DataType */}
+      {/* Div holds Button to submit request and Quantity input area */}
       <div id = 'add_and_submit'>
         <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
+        <label id='quantity_selector-label'> Quantity:
+          <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
+        </label>
+        <button id="add_to_favorites" onClick={handleSubmit} >Add current selection to favorites</button>
       </div>
+
+      {/* Text area to display results */}
       <div id= 'text_box_and_copy'>
         <textarea ref={textAreaInput} id="text_output">
         </textarea>
