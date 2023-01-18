@@ -80,13 +80,11 @@ const MainContainer = () => {
         </select>
         <button id='add_button' onClick={handleAdd} >Add Data Type</button>
       </div>
-      
       <div id="datatype_selector">
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
       </div>
       {/* make a button to add new DataType */}
       <div id = 'add_and_submit'>
-       
         <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
       </div>
       <div id= 'text_box_and_copy'>
