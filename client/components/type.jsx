@@ -1,12 +1,12 @@
 import React from 'react'
 import NewDataType from './NewDataType.jsx'
 
-export default function Type({type}) {
-  
-  // map over all of the datatypes in state and render a new component for each one
+export default function Type({type, clicked, handleClick}) {
+
+
   return (
     <div >
-            <button id='type-button' /*onClick ={handleClick}*/> {type} </button>
+            <button id='type-button' onClick={(type) => handleClick(type)}> {type} </button>
     </div>
   )
 }

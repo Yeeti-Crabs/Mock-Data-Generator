@@ -39,6 +39,9 @@ mongoose.connect(MONGO_URI, {
 
 //route to apiRouter
 app.use ('/api', apiRouter)
+app.get ('/user', (req, res) => {
+  res.status(200).json('success!');
+})
 
 
 // handle all unknown routes

@@ -66,6 +66,7 @@ table {
 
 .loginForm {
   margin: 20px;
+  width: 60%;
 }
 
 .loginLabel {
@@ -73,9 +74,18 @@ table {
   justify-content: space-between;
 }
 
-.loginBtn {
+.loginFormBtns {
+  display: flex;
+  justify-content: space-between;
   width: auto;
-  margin: 10px 20px;
+  margin-top: 10px;
+}
+
+.loginFormBtns button {
+  font-size: 1.1rem;
+  display: flex;
+  width: auto;
+  padding: auto;
 }
 
 .popUpBtn {
@@ -221,11 +231,12 @@ a:hover{
   display: flex;
   justify-content: space-between;
   padding-bottom: 1rem;
+  margin-top: 20px;
 }
 
 #add_button, #submit_button{
   width: 10rem;
-  height: 2rem;
+  height: 2rem
 }
 
 button{
@@ -271,15 +282,16 @@ button:active{
 
 .type-grid {
   display: grid;
-  /* grid-auto-rows: 400px;
-  grid-auto-columns: 2000px; */
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  grid-gap: 20px;
+  grid-gap: 15px;
+  grid-row-gap: 15px
 }
 
 #type-button {
-  width: 10rem;
-  height: 4rem;
+  width: 100%;
+  height: 3rem;
+  font-weight: bold;
+  font-size: 95%;
 }
 
 

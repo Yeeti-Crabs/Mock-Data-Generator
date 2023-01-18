@@ -12,32 +12,45 @@ import copyIcon from '../copyIcon.svg'
 import Login from '../components/login.jsx'
 
 const MainContainer = () => {
+  const types = ["First Name", "Full Name", "First Middle Last Name", "Email", "Phone Number", "Country"];
+  const [dataTypes, setDataTypes] = useState(types.reduce((acc, cur) => {
+    acc[cur] = false;
+    return acc;
+  }, {}))
 
-  const [dataTypes, setDataTypes] = useState([])
+
+  // const [dataTypes, setDataTypes] = useState(types.map(type => {
+  //   const obj = {};
+  //   obj[type] = false;
+  //   return obj;
+  // }))
+  console.log(dataTypes);
   const dataInput = useRef()
   const quantInput = useRef()
   const textAreaInput = useRef()
+  const [clicked, setClicked] = useState(false)
+  
 
-  function handleAdd(event) {
-    const typeOfData = dataInput.current.value;
-    // all of this insane logic inside of setDataTypes is just my way of preventing
-    // the user from adding the same dataType twice
-    setDataTypes(prevTypes => {
-      let alreadyExists = false;
+  // function handleAdd(event) {
+  //   const typeOfData = dataInput.current.value;
+  //   // all of this insane logic inside of setDataTypes is just my way of preventing
+  //   // the user from adding the same dataType twice
+  //   setDataTypes(prevTypes => {
+  //     let alreadyExists = false;
 
-      [...prevTypes].forEach((element) => {
-        if (element.type === typeOfData) {
-          alreadyExists = true;
-        }
-      })
-      if (alreadyExists === false) {
-        return [...prevTypes, { key: uuidv4(), type: typeOfData }]
-      } else {
-        return [...prevTypes]
-      }
+  //     [...prevTypes].forEach((element) => {
+  //       if (element.type === typeOfData) {
+  //         alreadyExists = true;
+  //       }
+  //     })
+  //     if (alreadyExists === false) {
+  //       return [...prevTypes, { key: uuidv4(), type: typeOfData }]
+  //     } else {
+  //       return [...prevTypes]
+  //     }
 
-    })
-  }
+  //   })
+  // }
 
 
   function handleDelete(theKey) {
@@ -67,13 +80,25 @@ const MainContainer = () => {
     navigator.clipboard.writeText(textAreaInput.current.value)
   }
 
-  const types = ["First Name", "Full Name", "First Middle Last Name", "Email", "Phone Number", "Country"];
+  
+
+  function handleClick(type) {
+      console.log("Inside handleClick");
+      if(dataTypes[type] === false){
+        setClicked(true);
+        setDataTypes({
+          ...dataTypes, // Copy the old fields
+          type: true // But override this one
+        });
+        console.log(dataTypes)
+      }
+  }
 
   return (
     <div id="main_container">
       
-      <div id='form'>
-        <Login />
+      <Login />
+      {/* <div id='form'>
         <label id='quantity_selector-label'> Quantity:
           <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
         </label>
@@ -86,17 +111,18 @@ const MainContainer = () => {
           <option value="country">Country</option>
         </select>
         <button id='add_button' onClick={handleAdd} >Add Data Type</button>
-      </div>
+      </div> */}
       
-      <div id="datatype_selector">
+      {/* <div id="datatype_selector">
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
-      </div>
+      </div> */}
 
       <div className='type-grid'>
         {types.map(type => (
           <Type
             type={type} 
-            // onClick ={handleClick}
+            clicked={clicked}
+            handleClick ={handleClick}
           />
         ))}
       </div>
