@@ -51,16 +51,17 @@ table {
 
 .popup {
   position: absolute;
-  top: 20%;
-  height: 50%;
-  width: 50%;
+  top: 30%;
+  left: 30%;
+  height: 40%;
+  width: 40%;
   background-color: #679186;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  z-index: 10;
-  display: none;
+  z-index: 100;
+  /* display: none; */
 }
 
 .loginForm {
@@ -68,12 +69,20 @@ table {
 }
 
 .loginLabel {
-  margin: 50px auto;
+  display: flex;
+  justify-content: space-between;
 }
 
 .loginBtn {
   width: auto;
-  margin: 20px;
+  margin: 10px 20px;
+}
+
+.popUpBtn {
+  position: absolute;
+  width: auto;
+  top:5%;
+  left: calc(50% - 22px);
 }
 
 /* ----------------------CONTAINERS----------------- */
@@ -237,7 +246,7 @@ button:active{
 
 #copy{
   position: absolute;
-  z-index: 10000;
+  z-index: 10;
   top: 5px;
   right:0px;
   width: 2rem;
