@@ -4,7 +4,8 @@
  */
 
 import React, { useEffect, useState, useRef } from 'react';
-import DataSelector from '../components/dataSelector.jsx'
+import DataSelector from '../components/DataSelector.jsx'
+// import Type from './type.jsx'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import copyIcon from '../copyIcon.svg'
@@ -64,6 +65,8 @@ const MainContainer = () => {
     navigator.clipboard.writeText(textAreaInput.current.value)
   }
 
+  const types = ["First Name", "Full Name", "First Middle Last Name", "Email", "Phone Number", "Country"];
+
   return (
     <div id="main_container">
       <div id='form'>
@@ -84,9 +87,20 @@ const MainContainer = () => {
       <div id="datatype_selector">
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
       </div>
+
+      {/* <div className='type-grid'>
+        {types.map(type => (
+          <Type
+            type={type} 
+            onClick ={handleClick}
+          />
+        ))}
+      </div> */}
+
+
+
       {/* make a button to add new DataType */}
       <div id = 'add_and_submit'>
-       
         <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
       </div>
       <div id= 'text_box_and_copy'>
@@ -99,3 +113,5 @@ const MainContainer = () => {
 };
 
 export default MainContainer;
+
+// address, age, DOB, 

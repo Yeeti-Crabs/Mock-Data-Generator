@@ -47,6 +47,34 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+/* ----------------------POPUP----------------- */
+
+.popup {
+  position: absolute;
+  top: 20%;
+  height: 50%;
+  width: 50%;
+  background-color: #679186;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  display: none;
+}
+
+.loginForm {
+  margin: 20px;
+}
+
+.loginLabel {
+  margin: 50px auto;
+}
+
+.loginBtn {
+  width: auto;
+  margin: 20px;
+}
 
 /* ----------------------CONTAINERS----------------- */
 
