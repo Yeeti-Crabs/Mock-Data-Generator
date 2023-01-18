@@ -30,14 +30,6 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-
-/* UTY ADDED !IMPORTANT TAGS - NEED TO FILTER THESE INTO ORIGINAL STYLES */
-
-label {
-  color: white !important;
-  font-weight: 600 !important;
-}
-
 button {
   background-color: #ff8906 !important;
   border: none !important;
@@ -53,39 +45,6 @@ button:hover {
   box-shadow: 2px 2px 0px 1px rgba(255,255,255,0.79) !important;
   cursor: pointer;
 }
-
-
-select {
-  background-color: #ffffff !important;
-  color: rgb(0, 0, 0) !important;
-  font-weight: bold !important;
-  border-radius: 5px !important;
-  height: 3rem !important;
-  box-shadow: 1px 1px 0px 1px rgba(255,255,255,0.79) !important;
-  cursor: pointer;
-  }
-  
-  select option {
-  background-color: #1e1e1e !important;
-  color: white !important;
-  }
-  
-  select option:hover {
-  background-color: #3f3f3f !important;
-  }
-  
-  select option:active {
-  background-color: #ff8906 !important;
-  color: white !important;
-  }
-  
-  select option:checked {
-  background-color: #ff8906 !important;
-  color: white !important;
-  }
-  
-  
-  /* END */
 
 
 
@@ -115,7 +74,7 @@ table {
 /* ----------------------CONTAINERS----------------- */
 
 body, #root{
-  background-color: #0f0e17;
+  background-color: #63626f;
   padding: 0%;
   margin: 0%;
   font-family: 'Poppins', sans-serif; 
@@ -136,34 +95,21 @@ body, #root{
  align-items: center;
 }
 #header{
-
   position: static;
-  margin-top: 20px;
+  top:0;
   /* margin: 0%;
   grid-row: 0;
   grid-column: 1/5; */
   display: flex;
   /* background-color: #679186; */
-  width:50vw;
-  /* height: 5%; */
-  justify-content: space-between;
-}
-
-.header-end {
-  display: flex;
-  justify-content: space-between;
+  width:100vw;
+  height: 5%;
+  justify-content: center;
   align-items: center;
-  width: 40%;
-  height: 100%;
-  /* background-color: #679186; */
-}
-
-.header-end button {
-  width: 30%;
+  color: white;
 }
 
 #header h1 {
-  height: 100%;
   font-size: 22px;
   font-weight: 600;
   color: #fffffe;
@@ -195,11 +141,6 @@ footer{
 
 /*------------------ FORMS ----------------- */
 
-textarea{
-  border-radius: 5px !important;
-  border: 2px solid #ff8906;
-}
-
 #datatype_selector {
   display: grid;
   padding: 1rem;
@@ -213,7 +154,7 @@ textarea{
   align-items: center;
   justify-content: space-between;
   width: 10rem;
-  background-color: #fdebd3;
+  background-color:#fdebd3 ;
   border:1px solid rgb(172, 172, 172);
   border-radius: 5px;
   display: flex;
@@ -246,21 +187,9 @@ textarea{
   width: 50%
 }
 #quantity_selector{
-  border-radius: 5px;
-  border: 0.5px solid rgb(172, 172, 172);
-  height: 3rem !important;
+  height: 1.5rem;
   margin-left: 0.5rem;
-  box-shadow: 1px 1px 0px 1px rgba(255,255,255,0.79) !important;
-
 }
-#quantity_selector-label {
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-}
-
 a{
   text-decoration: none;
   color: #264e70;
