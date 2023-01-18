@@ -9,6 +9,7 @@ import DataSelector from '../components/DataSelector.jsx'
 import { v4 as uuidv4 } from 'uuid'
 import axios from 'axios'
 import copyIcon from '../copyIcon.svg'
+import Login from '../components/login.jsx'
 
 const MainContainer = () => {
 
@@ -37,6 +38,7 @@ const MainContainer = () => {
 
     })
   }
+
 
   function handleDelete(theKey) {
     setDataTypes(prevTypes => {
@@ -69,7 +71,9 @@ const MainContainer = () => {
 
   return (
     <div id="main_container">
+      
       <div id='form'>
+        <Login />
         <label id='quantity_selector-label'> Quantity:
           <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
         </label>
