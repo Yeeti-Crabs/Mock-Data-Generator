@@ -4,6 +4,7 @@ const path = require("path");
 const app = express();
 const apiRouter = require("./routers/apiRouter.js");
 const userRouter = require("./routers/userRouter.js");
+const cookieParser = require("cookie-parser");
 const PORT = process.env.PORT || 3000;
 
 const MONGO_URI =
@@ -12,6 +13,8 @@ const MONGO_URI =
 // account for incoming data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use(cookieParser());
 
 // deal with cors headers
 app.use((req, res, next) => {

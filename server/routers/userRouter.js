@@ -21,6 +21,13 @@ router.post(
   }
 );
 
+router.patch("/updateTypes", userController.updateDataTypes, (req, res) => {
+  return res.status(200).json(res.locals.types);
+});
+
+router.get("/logout", cookieController.logoutCookie, (req, res) => {
+  return res.sendStatus(200);
+});
 // create a route to handle logout reqs
 // setSSID cookie to logged out and send it back to frontend
 
