@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-export default SignUp = () => {
+const SignUp = () => {
 
   // useState to update and track the input fields from the signup page
   const [username, setUsername] = useState('');
@@ -53,3 +53,5 @@ export default SignUp = () => {
     </div>
   );
 };
+
+export default SignUp;

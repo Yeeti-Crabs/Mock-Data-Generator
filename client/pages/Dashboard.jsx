@@ -9,12 +9,15 @@ import HeaderContainer from '../containers/headerContainer.jsx'
 import FooterContainer from '../containers/footerContainer.jsx'
 
 
-export default Dashboard = () => {
+const Dashboard = () => {
   return (
     <div id = 'root-child'>
+
       <HeaderContainer />
       <MainContainer />
       <FooterContainer />
     </div>
   );
 };
+
+export default Dashboard;

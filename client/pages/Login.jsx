@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios'
 
-export default Login = () => {
+const Login = () => {
 
   // useState to update and track the input fields from the login page
   const [password, setPassword] = useState('');
@@ -54,3 +54,5 @@ export default Login = () => {
     </div>
   );
 };
+
+export default Login;

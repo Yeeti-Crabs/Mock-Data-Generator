@@ -9,11 +9,11 @@ import SignUp from './pages/Signup.jsx';
 import Dashboard from './pages/Dashboard.jsx';
 
 
-export default App = () => {
+const App = () => {
   const [user, setUser] = useState({});
 
   return (
-    <div id = 'root-child'>   
+    <div id = 'root-child'>
       <Routes>
         <Route path="/" element={<Dashboard user = {user} />} />
         <Route path="/login" element={<Login setUser = {(user) => setUser(user)} />} />
@@ -22,3 +22,6 @@ export default App = () => {
     </div>
   );
 };
+
+
+export default App;
