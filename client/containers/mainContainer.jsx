@@ -12,7 +12,7 @@ import copyIcon from '../copyIcon.svg'
 import Login from '../components/login.jsx'
 
 const MainContainer = () => {
-  const types = ["First Name", "Full Name", "First Middle Last Name", "Email", "Phone Number", "Address", "Country", "Password", "Website", "Date"];
+  const types = ["First Name", "Last Name", "Full Name", "Email", "Phone Number", "Address", "Country", "Date", "Website", "Image"];
   const [dataTypes, setDataTypes] = useState(types.reduce((acc, cur) => {
     acc[cur] = false;
     return acc;
@@ -79,13 +79,30 @@ const MainContainer = () => {
   function handleCopy(event) {
     navigator.clipboard.writeText(textAreaInput.current.value)
   }
-
+ 
+  function handleSaveFavorites(){
+    console.log(dataTypes)
+    //console.log(favorites)
+    const fav = [];
+    for(let key in dataTypes){
+        if(dataTypes[key]) fav.push(key)
+      }
+    setFavorites(fav);
+  }
   
+  function handleSelectFromFavorites(){
+    const searchTypes = [];
+    for(let key in dataTypes){
+      if(dataTypes[key]) searchTypes.push(key)
+    }
+    // console.log(searchTypes)
+    // console.log(favorites)
+
+  }
 
   function handleClick(type) {
 
       if(dataTypes[type] === false){
-        setClicked(true);
         const obj = {};
         obj[type] = true;
         setDataTypes({
@@ -95,7 +112,6 @@ const MainContainer = () => {
       }
 
       else{
-        setClicked(false);
         const obj = {};
         obj[type] = false;
         setDataTypes({
@@ -104,6 +120,8 @@ const MainContainer = () => {
         });
       }
   }
+
+
 
   return (
     <div id="main_container">
@@ -129,8 +147,9 @@ const MainContainer = () => {
         {types.map(type => (
           <Type
             type={type} 
-            clicked={clicked}
+            clicked={dataTypes[type]}
             handleClick ={handleClick}
+            setClicked = {setClicked}
           />
         ))}
       </div>
@@ -143,7 +162,9 @@ const MainContainer = () => {
         <label id='quantity_selector-label'> Quantity:
           <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
         </label>
-        <button id="add_to_favorites" onClick={handleSubmit} >Add current selection to favorites</button>
+        <button id="add_to_favorites" onClick={handleSaveFavorites} >Mark current selection as favorites</button>
+        <button id="submit_favorites" onClick={handleSelectFromFavorites} >Select from Favorites</button>
+
       </div>
 
       {/* Text area to display results */}

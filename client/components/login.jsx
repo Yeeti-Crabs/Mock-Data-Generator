@@ -5,42 +5,37 @@ import SignUpPage from './signUpPage.jsx';
 import LoginPage from './loginPage.jsx';
 
 const Login = (props) => {
-  // const msg = useRef('test');
-  const [msg, setMsg] = useState();
-  const username = useRef() ;
-  const password = useRef();
-  const passwordR = useRef();
-  const [popUp, setPopUp] = useState(<LoginPage {...{username, password, msg, sendLogin, closeLogin, openSignUp}} />);
   
-
+  /* ----------popup button ---------*/
   const popUpBtn = (
     <div>
-      <button className="popUpBtn" onClick={openLogin}>Login</button>
+      <button className="popUpBtn" onClick={openLogin}>Log in</button>
     </div>
   )
+  
+  const logOutBtn = (
+    <div>
+      <button className="logOutBtn" onClick={logOut}>Log out</button>
+    </div>
+  )
+  
+  const [popUp, setPopUp] = useState(popUpBtn);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try{
-        const data = await axios.get('/user');
-        console.log(data);
-      } catch (err) {
-        console.log('ERROR:', err);
-      }
-    }
-    fetchData();
-  },[])
-
+  /* ----------click handlers ---------*/
   function closeLogin() {
     setPopUp(popUpBtn);
   }
 
+  function loggedIn() {
+    setPopUp(logOutBtn);
+  }
+  
   function openLogin() {
     const inputs = document.querySelectorAll('input');
     inputs.forEach((input) => {
       input.value = '';
     })
-    setPopUp(<LoginPage {...{username, password, msg, sendLogin, closeLogin, openSignUp}} />);
+    setPopUp(<LoginPage {...{ closeLogin, openSignUp, loggedIn }} />);
   }
   
   function openSignUp() {
@@ -48,54 +43,32 @@ const Login = (props) => {
     inputs.forEach((input) => {
       input.value = '';
     })
-    setPopUp(<SignUpPage {...{username, password, passwordR, msg, sendSignup, openLogin}} />);
-  }
-
-  function sendLogin(e) {
-    e.preventDefault();
-    const login = async () => {
-      const response = await axios.post('/user/login', { username: username.current, password:password.current })
-      console.log(response);
-    }
-    login();
+    setPopUp(<SignUpPage {...{ passwordR, openLogin, loggedIn }} />);
   }
   
-  function sendSignup(e) {
-    e.preventDefault();
-    console.log('testdone');
-    if (password.current !== passwordR.current) {
-      console.log('password doesn\'t match');
-      setMsg('Passwords do not match!');
-      console.log('after click', msg);
-      // setTimeout(() => {
-      //   setMessage('')
-      // },3000);
-      return;
+  function logOut() {
+    const fetchData = async () => {
+      try{
+        const data = await axios.get('/user/logout');
+        setPopUp(<LoginPage {...{ closeLogin, openSignUp, loggedIn }} />);
+      } catch (err) {
+        console.log('logout error:', err);
+      }
     }
-    // const signUp = async () => {
-    //   const response = await axios.post('/user/signup', { username: username.current, password:password.current })
-    //   console.log(response);
-    // }
-    
-    //   // if(Object.hasOwn(data, '[dataprop]')) {
-    //   //   setSession(true);
-    //   // }
-    // signUp();
   }
+  
+   /* ----------render update---------*/
   useEffect(() => {
-    console.log('updated')
-  })
-  console.log(msg);
-  // const fetchUrls = async () => {
-  //   const response = await axios.get("http://localhost:3000/api/sprites");
-  //   // console.log('console.log inside fetchUrls()')
-  //   console.log(response.data)
-  //   for(let i = 0; i < cardImages.length; i++){
-  //       cardImages[i].src = response.data[i].src;
-  //   }
-  //   console.log(cardImages)
-  // }
-
+    const fetchData = async () => {
+      try{
+        const data = await axios.get('/user');
+        setPopUp(logOutBtn);
+      } catch (err) {
+        setPopUp(<LoginPage {...{ closeLogin, openSignUp, loggedIn }} />);
+      }
+    }
+    fetchData();
+  },[])
 
   return (
     <>
