@@ -55,8 +55,8 @@ const signUpPage = (props) => {
           <input type="password" id="passwordR" onChange={e => {passwordR.current = e.target.value}} required />
         </label>
         <div className="loginFormBtns">
-          <button type="submit" className="loginBtn" >Signup</button>
-          <button type="button" className="loginBtn" onClick={props.openLogin}>Back to Login</button>
+          <button type="submit" className="button" >Signup</button>
+          <button type="button" className="button" onClick={props.openLogin}>Back to Login</button>
         </div>
       </form>
       <p>{message}</p>

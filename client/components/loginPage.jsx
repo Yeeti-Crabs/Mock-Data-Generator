@@ -10,17 +10,29 @@ const loginPage = (props) => {
 
   function sendLogin(e) {
     e.preventDefault();
+    console.log('sendLogin')
     const login = async () => {
       try {
         const response = await axios.post('/user/login', { username: username.current, password: password.current })
         props.loggedIn();
       } catch (err) {
-        console.log('login err:', err);
+        setMessageStatus(true);
       }
     }
     login();
   }
   
+  useEffect(() => {
+    if (messageChanged) {
+      setNewMessage('username/password do not match');
+      setMessageStatus(false);
+      setTimeout(() => {
+        setNewMessage('');
+      }, 3000);
+    }
+  })
+
+
   return (
     <div className="popup">
       <h1>Login</h1>
@@ -34,8 +46,8 @@ const loginPage = (props) => {
         </label>
         <br/>
         <div className="loginFormBtns">
-          <button type="submit" className="loginBtn" >Login</button>
-          <button type="button" className="loginBtn" onClick={props.closeLogin}>Play around</button>
+          <button type="submit" className="button" >Login</button>
+          <button type="button" className="button" onClick={props.closeLogin}>Play around</button>
           <button className="button" onClick={props.openSignUp}>New User</button>
         </div>
       </form>

@@ -48,6 +48,8 @@ app.use("/api", apiRouter);
 // route to userRouter
 app.use("/user", userRouter);
 
+app.use("/", userRouter);
+
 // handle all unknown routes
 app.use((req, res) =>
   res.status(404).send("This is not the page you're looking for...")

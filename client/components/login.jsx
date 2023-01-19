@@ -5,25 +5,25 @@ import SignUpPage from './signUpPage.jsx';
 import LoginPage from './loginPage.jsx';
 
 const Login = (props) => {
+  const [popUp, setPopUp] = useState();
   
   /* ----------popup button ---------*/
-  const popUpBtn = (
+  const loginBtn = (
     <div>
-      <button className="popUpBtn" onClick={openLogin}>Log in</button>
+      <button className="popUpBtn loginBtn" onClick={openLogin}>Log in</button>
     </div>
   )
   
   const logOutBtn = (
     <div>
-      <button className="logOutBtn" onClick={logOut}>Log out</button>
+      <button className="popUpBtn logOutBtn" onClick={logOut}>Log out</button>
     </div>
   )
   
-  const [popUp, setPopUp] = useState(popUpBtn);
 
   /* ----------click handlers ---------*/
   function closeLogin() {
-    setPopUp(popUpBtn);
+    setPopUp(loginBtn);
   }
 
   function loggedIn() {
@@ -31,7 +31,7 @@ const Login = (props) => {
   }
   
   function openLogin() {
-    const inputs = document.querySelectorAll('input');
+    const inputs = document.querySelectorAll('.popup > input');
     inputs.forEach((input) => {
       input.value = '';
     })
@@ -39,22 +39,24 @@ const Login = (props) => {
   }
   
   function openSignUp() {
-    const inputs = document.querySelectorAll('input');
+    const inputs = document.querySelectorAll('.popup > input');
     inputs.forEach((input) => {
       input.value = '';
     })
-    setPopUp(<SignUpPage {...{ passwordR, openLogin, loggedIn }} />);
+    setPopUp(<SignUpPage {...{ openLogin, loggedIn }} />);
   }
   
   function logOut() {
     const fetchData = async () => {
       try{
         const data = await axios.get('/user/logout');
-        setPopUp(<LoginPage {...{ closeLogin, openSignUp, loggedIn }} />);
+        // console.log(data);
+        window.location.reload();
       } catch (err) {
         console.log('logout error:', err);
       }
     }
+    fetchData();
   }
   
    /* ----------render update---------*/
@@ -64,7 +66,7 @@ const Login = (props) => {
         const data = await axios.get('/user');
         setPopUp(logOutBtn);
       } catch (err) {
-        setPopUp(<LoginPage {...{ closeLogin, openSignUp, loggedIn }} />);
+        setPopUp(loginBtn);
       }
     }
     fetchData();

@@ -97,14 +97,13 @@ table {
   width: auto;
   top:6%;
   left: calc(75% - 46px);
+}
+
+.loginBtn {
   background-color: rgb(62, 204, 252);
 }
 
 .logOutBtn {
-  position: absolute;
-  width: auto;
-  top:6%;
-  left: calc(75% - 46px);
   background-color: rgb(253, 71, 71);
 }
 
@@ -319,6 +318,10 @@ button:active{
   height: 3rem;
 }
 #submit_favorites{
+  width: 7rem;
+  height: 3rem;
+}
+#clear_selection{
   width: 7rem;
   height: 3rem;
 }

@@ -25,7 +25,7 @@ const MainContainer = () => {
   //   return obj;
   // }))
   // console.log(dataTypes);
-  const dataInput = useRef()
+  const displayType = useRef()
   const quantInput = useRef()
   const textAreaInput = useRef()
   const [clicked, setClicked] = useState(false)
@@ -53,52 +53,205 @@ const MainContainer = () => {
   // }
 
 
-  function handleDelete(theKey) {
-    setDataTypes(prevTypes => {
-      return [...prevTypes].filter((element) => element.key !== theKey)
-    })
-  }
+  // function handleDelete(theKey) {
+  //   setDataTypes(prevTypes => {
+  //     return [...prevTypes].filter((element) => element.key !== theKey)
+  //   })
+  // }
 
-  function handleSubmit(event) {
-    const stateData = dataTypes
-    const quantity = quantInput.current.value
-    let fetchString = `http://localhost:3000/api?quantity=${quantity}`
+  // function handleSubmit(event) {
+  //   const stateData = dataTypes
+  //   const quantity = quantInput.current.value
+  //   let fetchString = `http://localhost:3000/api?quantity=${quantity}`
 
-    // build our url with all of the datatypes in the query string
-    stateData.forEach((element) => {
-      fetchString += `&${element.type}=true`
-    })
+  //   // build our url with all of the datatypes in the query string
+  //   stateData.forEach((element) => {
+  //     fetchString += `&${element.type}=true`
+  //   })
 
-    axios.get(fetchString)
-    .then((response) => {
-      textAreaInput.current.value = JSON.stringify(response.data)
-    })
-    .catch((err) => console.log('something wrong with axios request', err))
-  }
+  //   axios.get(fetchString)
+  //   .then((response) => {
+  //     textAreaInput.current.value = JSON.stringify(response.data)
+  //   })
+  //   .catch((err) => console.log('something wrong with axios request', err))
+  // }
 
   function handleCopy(event) {
     navigator.clipboard.writeText(textAreaInput.current.value)
   }
  
   function handleSaveFavorites(){
-    console.log(dataTypes)
-    //console.log(favorites)
     const fav = [];
     for(let key in dataTypes){
         if(dataTypes[key]) fav.push(key)
       }
+    console.log(favorites)
+
     setFavorites(fav);
+    console.log(favorites)
+    const favsForBody = convertStrings(fav);
+
+    const sendFavs = async () => {
+      try {
+        const response = await axios.patch('/updateTypes', {dataTypes: favsForBody});
+        //console.log('inside sendFavs()');
+        //console.log(response.data);
+      } catch (err) {
+        console.log('Error when sending favorites to DB:', err);
+      }
+    }
+    sendFavs();
+
+
+  }
+
+  function convertStrings (array) {
+    
+    for(let i = 0; i < array.length; i++){
+      switch(array[i]) {
+        case 'First Name':
+          array[i] = 'firstname';
+          break;
+        case 'Last Name':
+          array[i] = 'lastname';
+          break;
+        case 'Full Name':
+          array[i] = 'fullname';
+          break;
+        case 'Email':
+          array[i] = 'email';
+          break;
+        case 'Phone Number':
+          array[i] = 'phone';
+          break;
+        case 'Address':
+          array[i] = 'address';
+          break;
+        case 'Country':
+          array[i] = 'country';
+          break;
+        case 'Date':
+          array[i] = 'date';
+          break;
+        case 'Website':
+          array[i] = 'website';
+          break;
+        case 'Image':
+          array[i] = 'image';
+          break;
+        default:
+          break;
+      }
+    }
+    return array;
+  }
+
+  function convertStringsForFE (array) {
+    
+    for(let i = 0; i < array.length; i++){
+      switch(array[i]) {
+        case 'firstname':
+          array[i] = 'First Name';
+          break;
+        case 'lastname':
+          array[i] = 'Last Name';
+          break;
+        case 'fullname':
+          array[i] = 'Full Name';
+          break;
+        case 'email':
+          array[i] = 'Email';
+          break;
+        case 'phone':
+          array[i] = 'Phone Number';
+          break;
+        case 'address':
+          array[i] = 'Address';
+          break;
+        case 'country':
+          array[i] = 'Country';
+          break;
+        case 'date':
+          array[i] = 'Date';
+          break;
+        case 'website':
+          array[i] = 'Website';
+          break;
+        case 'image':
+          array[i] = 'Image';
+          break;
+        default:
+          break;
+      }
+    }
+    return array;
   }
   
+  function clearSelection() {
+    
+    const obj = {}
+    //clear current selection
+    for(let key in dataTypes){
+      if(dataTypes[key] === true){
+        obj[key] = false;
+      }
+    }
+    setDataTypes({
+      ...dataTypes, 
+      ...obj 
+    });
+    return;
+  }
+
   function handleSelectFromFavorites(){
+    convertStringsForFE(favorites)
+    // const favsForFE = convertStringsForFE(array);
+    // setFavorites(favsForFE);
+
+    //assume favorites prop already has strings of favorites ready for the front-end
+    clearSelection();
+    console.log("dataTypes after attempting to clear:")
+    console.log(dataTypes)
+
+    // iterate through favorites array, changing the matching dataTypes values to true
+    const obj = {};
+    for(let i = 0; i < favorites.length; i++){
+      obj[favorites[i]] = true;
+    }
+    setDataTypes({
+      ...dataTypes, 
+      ...obj // 
+    });
+    console.log(favorites)
+
+
+    return;
+  }
+
+  function handleSubmit () {
     const searchTypes = [];
     for(let key in dataTypes){
       if(dataTypes[key]) searchTypes.push(key)
     }
-    // console.log(searchTypes)
-    // console.log(favorites)
+    const TypesForBody = convertStrings(searchTypes);
+    console.log(TypesForBody);
 
+    const quantity = quantInput.current.value;
+    console.log(quantity);
+
+    const sendTypes = async () => {
+      try {
+        const response = await axios.get('/api', {dataTypes: TypesForBody, quantity: quantity});
+        console.log('inside sendTypes()');
+        console.log(response.data);
+        textAreaInput.current.value = JSON.stringify(response.data)
+      } catch (err) {
+        console.log('Error when sending data types to back-end:', err);
+      }
+    }
+    sendTypes();
   }
+
 
   function handleClick(type) {
 
@@ -121,23 +274,26 @@ const MainContainer = () => {
       }
   }
 
+  function selectDisplayType() {
+    switch (displayType.current.value) {
+      case 'Javascript':
+        textAreaInput.current.value = JSON.parse(textAreaInput.current.value)
+        break;
+      case 'JSON':
+        textAreaInput.current.value = JSON.stringify(textAreaInput.current.value)
+        break;
+      case 'CSV':
+        textAreaInput.current.value = "doesn't work yet"
+        break;
+    }
+  }
 
 
   return (
     <div id="main_container">
       
       <Login />
-      {/* <div id='form'>
-        <select ref={dataInput} name="dataSelect" id="dataSelect">
-          <option value="firstName">First Name</option>
-          <option value="fullName">Full Name</option>
-          <option value="fullNameMiddle">First Middle Last Name</option>
-          <option value="email">Email</option>
-          <option value="phoneNumber">Phone Number</option>
-          <option value="country">Country</option>
-        </select>
-        <button id='add_button' onClick={handleAdd} >Add Data Type</button>
-      </div> */}
+      
       
       {/* <div id="datatype_selector">
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
@@ -162,6 +318,7 @@ const MainContainer = () => {
         <label id='quantity_selector-label'> Quantity:
           <input ref={quantInput} id="quantity_selector" type="number" min='1' max = '100' defaultValue= '5'/>
         </label>
+        <button id="clear_selection" onClick={clearSelection} >Clear Selection</button>
         <button id="add_to_favorites" onClick={handleSaveFavorites} >Mark current selection as favorites</button>
         <button id="submit_favorites" onClick={handleSelectFromFavorites} >Select from Favorites</button>
 
@@ -169,6 +326,13 @@ const MainContainer = () => {
 
       {/* Text area to display results */}
       <div id= 'text_box_and_copy'>
+        <div id='form'>
+          <select ref={displayType} name="displayType" id="displayType" onChange={selectDisplayType}>
+            <option value="JSON">JSON</option>
+            <option value="Javascript">Javascript</option>
+            <option value="CSV">CSV</option>
+          </select>
+        </div>
         <textarea ref={textAreaInput} id="text_output">
         </textarea>
         <button id='copy' onClick={handleCopy} ><img src='../copyIcon.svg' alt="copy to clipboard" /></button>
