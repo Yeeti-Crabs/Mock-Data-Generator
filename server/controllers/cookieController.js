@@ -1,5 +1,5 @@
 const cookieController = {};
-const User = require('../models/authModels');
+const {User} = require('../models/authModels');
 
 cookieController.setCookie = (req, res, next) => { 
   const temp = Math.floor(Math.random() * 1000000);

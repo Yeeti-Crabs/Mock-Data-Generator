@@ -1,4 +1,4 @@
-const Session = require('../models/authModels');
+const {Session} = require('../models/authModels');
 
 const sessionController = {};
 

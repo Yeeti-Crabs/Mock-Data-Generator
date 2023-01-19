@@ -6,6 +6,16 @@ const ProfileSchema = new mongoose.Schema({
   pastQueries: {type: Array, default: []}  
 }); 
 
-const Profile  = mongoose.model("Profile", ProfileSchema)
+const Profile = mongoose.model("Profile", ProfileSchema)
 
-module.exports = Profile;
+
+const sessionSchema = new mongoose.Schema({
+  cookieId: { type: String, required: true, unique: true },
+  createdAt: { type: Date, expires: 60, default: Date.now }
+});
+
+
+const Session = mongoose.model('Session', sessionSchema);
+
+
+module.exports = {Profile, Session}
