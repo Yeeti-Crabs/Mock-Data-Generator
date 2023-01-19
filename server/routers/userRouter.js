@@ -16,8 +16,9 @@ router.post(
   "/login",
   userController.verifyUser,
   cookieController.setSSIDCookie,
+  userController.sendStarredDataTypes,
   (req, res) => {
-    return res.status(200).json(res.locals.message);
+    return res.status(200).json(res.locals.starredDataTypes);
   }
 );
 
@@ -28,7 +29,14 @@ router.patch("/updateTypes", userController.updateDataTypes, (req, res) => {
 router.get("/logout", cookieController.logoutCookie, (req, res) => {
   return res.sendStatus(200);
 });
-// create a route to handle logout reqs
-// setSSID cookie to logged out and send it back to frontend
+
+router.get(
+  "/",
+  cookieController.verifySSIDCookie,
+  userController.sendStarredDataTypes,
+  (req, res) => {
+    return res.status(200).json(res.locals.starredDataTypes);
+  }
+);
 
 module.exports = router;
