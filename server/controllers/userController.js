@@ -94,4 +94,24 @@ userController.updateDataTypes = async (req, res, next) => {
   }
 };
 
+// get and send user's starred data types
+userController.sendStarredDataTypes = async (req, res, next) => {
+  try {
+    // pull the id from cookie
+    const { ssid } = req.cookies;
+    // find user with that id
+    User.findOne({ _id: ssid }).then((user) => {
+      res.locals.starredDataTypes = user.starredDataTypes;
+      return next();
+    });
+  } catch (err) {
+    return next({
+      log: `userController.sendStarredDataTypes: ERROR: ${err}`,
+      message: {
+        err: "Error occured in userController.sendStarredDataTypes, check server logs for more details",
+      },
+    });
+  }
+};
+
 module.exports = userController;
