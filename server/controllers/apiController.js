@@ -16,14 +16,26 @@ apiController.getData = (req, res, next) => {
 
       dataArr.forEach((obj) => {
         const newObj = {};
-        if (dataTypes.includes("fullname")) {
-          newObj.fullname = obj.firstname + " " + obj.lastname;
-        }
-        for (const key in obj) {
-          if (dataTypes.includes(key)) {
-            newObj[key] = obj[key];
+        // if (dataTypes.includes("fullname")) {
+        //   newObj.fullname = obj.firstname + " " + obj.lastname;
+        // }
+        // for (const key in obj) {
+        //   if (dataTypes.includes(key)) {
+        //     newObj[key] = obj[key];
+        //   }
+        // }
+        dataTypes.forEach((type) => {
+          if (type === "fullname") {
+            newObj.fullname = obj.firstname + " " + obj.lastname;
+            console.log(newObj.fullname);
+          } else if (type === "date") {
+            newObj.date = obj.birthday;
+          } else if (type === "country") {
+            newObj.country = obj.address.country;
+          } else {
+            newObj[type] = obj[type];
           }
-        }
+        });
         result.push(newObj);
       });
       res.locals.result = result;
