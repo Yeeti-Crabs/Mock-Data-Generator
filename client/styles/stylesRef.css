@@ -1,0 +1,344 @@
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+
+/* UTY ADDED !IMPORTANT TAGS - NEED TO FILTER THESE INTO ORIGINAL STYLES */
+
+label {
+  color: white !important;
+  font-weight: 600 !important;
+}
+
+button {
+  background-color: #ff8906 !important;
+  border: none !important;
+  color: white !important;
+  font-weight: bold !important;
+  border-radius: 5px !important;
+  box-shadow: 1px 1px 0px 1px rgba(255,255,255,0.79) !important;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #cf730a !important;
+  box-shadow: 2px 2px 0px 1px rgba(255,255,255,0.79) !important;
+  cursor: pointer;
+}
+
+
+select {
+  background-color: #ffffff !important;
+  color: rgb(0, 0, 0) !important;
+  font-weight: bold !important;
+  border-radius: 5px !important;
+  height: 3rem !important;
+  box-shadow: 1px 1px 0px 1px rgba(255,255,255,0.79) !important;
+  cursor: pointer;
+  }
+  
+  select option {
+  background-color: #1e1e1e !important;
+  color: white !important;
+  }
+  
+  select option:hover {
+  background-color: #3f3f3f !important;
+  }
+  
+  select option:active {
+  background-color: #ff8906 !important;
+  color: white !important;
+  }
+  
+  select option:checked {
+  background-color: #ff8906 !important;
+  color: white !important;
+  }
+  
+  
+  /* END */
+
+
+
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+* {
+  font-family: 'Poppins', sans-serif; 
+}
+
+/* ----------------------CONTAINERS----------------- */
+
+body, #root{
+  background-color: #0f0e17;
+  padding: 0%;
+  margin: 0%;
+  font-family: 'Poppins', sans-serif; 
+  height: 100vh;
+  width: 100vw;
+}
+#root-child{
+  position: relative;
+  height: 100vh;
+  display: flex;
+  /* display: grid;
+ align-items: center;
+ grid-template-rows: repeat(14, 1fr); */
+ /* grid-template-columns: repeat(4, 1fr); */
+ /* grid-template-rows: 1fr, 12fr, 1fr  */
+ flex-direction: column;
+ justify-content: space-between;
+ align-items: center;
+}
+#header{
+
+  position: static;
+  margin-top: 20px;
+  /* margin: 0%;
+  grid-row: 0;
+  grid-column: 1/5; */
+  display: flex;
+  /* background-color: #679186; */
+  width:50vw;
+  /* height: 5%; */
+  justify-content: space-between;
+}
+
+.header-end {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+  /* background-color: #679186; */
+}
+
+.header-end button {
+  width: 30%;
+}
+
+#header h1 {
+  height: 100%;
+  font-size: 22px;
+  font-weight: 600;
+  color: #fffffe;
+}
+
+h1{
+  font-size: 2rem;
+}
+footer{
+  position: relative;
+  display: flex;
+  bottom: 0;
+  /* grid-row: 14;
+  grid-column: 1/5; */
+  border-top: 2px solid #ff8906;
+  width: 95vw;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  align-items: center;
+  color: rgb(60, 60, 60);
+}
+#main_container{
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  height:60% 
+}
+
+/*------------------ FORMS ----------------- */
+
+textarea{
+  border-radius: 5px !important;
+  border: 2px solid #ff8906;
+}
+
+#datatype_selector {
+  display: grid;
+  padding: 1rem;
+  height: 30%;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-rows: repeat(3, 1fr);
+}
+
+#new_data_type{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 10rem;
+  background-color: #fdebd3;
+  border:1px solid rgb(172, 172, 172);
+  border-radius: 5px;
+  display: flex;
+  margin: .5rem;
+  padding: .5rem; 
+  color: rgb(60, 60, 60)
+}
+#new_data_type > button{
+  border: none;
+  background-color:#fdebd3;
+  
+}
+#text_box_and_copy{
+  height: 80%;
+  position: relative;
+}
+#text_output{
+  width:100%;
+  height:100%;
+}
+#form{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+}
+
+#dataSelect{
+  height: 2rem;
+  width: 50%
+}
+#quantity_selector{
+  border-radius: 5px;
+  border: 0.5px solid rgb(172, 172, 172);
+  height: 3rem !important;
+  margin-left: 0.5rem;
+  box-shadow: 1px 1px 0px 1px rgba(255,255,255,0.79) !important;
+
+}
+#quantity_selector-label {
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+a{
+  text-decoration: none;
+  color: #264e70;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+@media screen and (max-width: 1200px) {
+ body{
+  align-items: center;
+ }
+  #form{
+  flex-direction: column;
+ }
+  #main_container{
+    width: 80vw
+  }
+}
+
+/* ---------------------BUTTONS--------------------- */
+#add_and_submit{
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+}
+
+#add_button, #submit_button{
+  width: 10rem;
+  height: 2rem;
+}
+button{
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: #bbd4ce;
+  border: .5px solid rgb(172, 172, 172);
+  border-radius: 5px;
+  color: rgb(60, 60, 60);
+}
+button:hover{
+  background-color:#679186
+}
+button:active{
+  color: black;
+  border: 1px solid black
+}
+
+#copy{
+  position: absolute;
+  z-index: 10000;
+  top: 5px;
+  right:0px;
+  width: 2rem;
+  height: 2rem;
+}
+
+
+/* X Button styling */
+.X-button {
+
+  color: rgb(60, 60, 60);
+ 
+  transition: all 125ms linear;
+}
+
+.X-button:hover {
+  color: #679186;
+  cursor: pointer;
+  text-shadow: #679186 1px 0 1px;
+  transform: scale(1.2);
+}
+
+
+
+
+
+
+
+
+
+

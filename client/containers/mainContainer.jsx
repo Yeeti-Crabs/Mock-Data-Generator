@@ -55,7 +55,7 @@ const MainContainer = () => {
 
     axios.get(fetchString)
     .then((response) => {
-      textAreaInput.current.value = JSON.stringify(response.data)
+      textAreaInput.current.value = JSON.stringify(response.data, null, 2)
     })
     .catch((err) => console.log('something wrong with axios request', err))
   }
@@ -63,6 +63,11 @@ const MainContainer = () => {
   function handleCopy(event) {
     navigator.clipboard.writeText(textAreaInput.current.value)
   }
+
+
+  console.log(textAreaInput);
+
+
 
   return (
     <div id="main_container">
@@ -84,13 +89,13 @@ const MainContainer = () => {
         <DataSelector dataTypes={dataTypes} handleDelete={handleDelete} />
       </div>
       {/* make a button to add new DataType */}
-      <div id = 'add_and_submit'>
-        <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
-      </div>
       <div id= 'text_box_and_copy'>
         <textarea ref={textAreaInput} id="text_output">
         </textarea>
-        <button id='copy' onClick={handleCopy} ><img src='../copyIcon.svg' alt="copy to clipboard" /></button>
+        <button id='copy' onClick={handleCopy} ><img src='../styles/logos/mockerblack.png' alt="copy to clipboard" id='copy-image' /></button>
+      </div>
+      <div id = 'add_and_submit'>
+        <button id="submit_button" onClick={handleSubmit} >Generate Data</button>
       </div>
     </div>
   )

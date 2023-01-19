@@ -12,12 +12,69 @@ body {
   background-color: #f2f2f2;
 }
 
+textarea{
+  border-radius: 12px !important;
+  /* border: 2px solid #ff8906 !important; */
+  border: 2px solid #FFB61D !important;
+
+}
+
+button {
+  /* background-color: #ff8906 !important; */
+  background-color: #FFB61D !important;
+  border: none !important;
+  color: rgb(0, 0, 0) !important;
+  font-weight: bold !important;
+  border-radius: 5px !important;
+  box-shadow: 3px 3px 0px 1px rgba(0, 0, 0, 0.79) !important;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #cf730a !important;
+  box-shadow: 2px 2px 0px 1px rgba(0, 0, 0, 0.79) !important;
+  cursor: pointer;
+}
+
+
+button:active {
+  box-shadow: 0 5px #666;
+  transform: translateY(2px);
+}
+
+
 /* Header Styles */
+
+.mocker-logo {
+  width: 200px;
+}
+
 header {
+  display: flex;
+  justify-content: center;
   background-color: #333;
   color: white;
-  text-align: center;
+  /* text-align: center; */
   padding: 20px;
+}
+
+.header-buttons {
+
+}
+
+.header-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.header-text {
+  width: 50vw;
+  justify-content: flex-start;
+  /* border: 1px solid white; */
 }
 
 header h1 {
@@ -25,15 +82,20 @@ header h1 {
   font-size: 36px;
 }
 
+header h3 {
+  font-weight: 400;
+}
+
 /* Main Container Styles */
 #main_container {
   max-width: 1200px;
   margin: 0 auto;
+  margin-top: 100px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: left;
   padding: 20px;
 }
 
@@ -45,20 +107,37 @@ header h1 {
 
 #quantity_selector-label {
   margin-right: 10px;
+  font-weight: 600;
+
 }
 
 #quantity_selector {
   width: 60px;
+  border-radius: 5px;
+  border: 0.5px solid #FFB61D;
+  height: 3rem !important;
+  margin-left: 0.5rem;
+  /* box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.79) !important; */
 }
 
 #dataSelect {
+  border: 0.5px solid #FFB61D;
   margin-right: 10px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  font-weight: thin;
+  border-radius: 5px;
+  height: 3rem;
+  /* box-shadow: 1px 1px 0px 1px rgba(0, 0, 0, 0.79); */
+  cursor: pointer;
 }
+
+
 
 #add_button {
   background-color: #4CAF50;
   color: white;
-  padding: 8px 15px;
+  padding: 8px 15px; 
   border: none;
   cursor: pointer;
 }
@@ -92,27 +171,36 @@ header h1 {
   display: flex;
   align-items: center;
   margin-top: 20px;
+  width: 75%;
 }
 
 #text_output {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
+  min-height: 250px;
   box-sizing: border-box;
-  border: 2px solid #ccc;
   border-radius: 4px;
   background-color: #f8f8f8;
   font-size: 16px;
   resize: none;
 }
 
+#copy-image {
+  width: 20px;
+  margin-right: -3px;
+  margin-bottom: -2px;
+  cursor: pointer;
+}
+
 #copy {
   background-color: #4CAF50;
   color: white;
-  padding: 8px 15px;
+  padding: 5px 10px;
   border: none;
   cursor: pointer;
-  margin-left: 10px;
+  margin-left: -60px;
+  margin-top: -180px;
 }
 
 #copy:hover {
